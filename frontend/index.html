@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ProcureAI | Multilingual Procurement Intelligence</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">🤖</div>
+
+                <div>
+                    <h2>ProcureAI</h2>
+                    <span>SIH26032</span>
+                </div>
+            </div>
+
+            <div class="sidebar-actions">
+                <button class="sidebar-nav-btn active" id="openChatBtn" onclick="openAssistantView()">
+                    <span>💬</span>
+                    <span>AI Assistant</span>
+                </button>
+
+                <button class="new-chat" onclick="newChat()">
+                    <span>＋</span>
+                    New Chat
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+
+                <div class="section-title">
+                    QUICK ACTIONS
+                </div>
+
+                <button class="quick-action"
+                    onclick="handleQuickAction('Show me delayed procurements')">
+                    <span>⚠</span>
+                    Delayed Procurements
+                </button>
+
+                <button class="quick-action"
+                    onclick="handleQuickAction('What procurements are due this week?')">
+                    <span>◷</span>
+                    Upcoming Schedules
+                </button>
+
+                <button class="quick-action"
+                    onclick="handleQuickAction('Which procurement is most urgent?')">
+                    <span>⚡</span>
+                    Urgent Procurement
+                </button>
+
+                <button class="quick-action"
+                    onclick="handleQuickAction('Give me a procurement summary')">
+                    <span>▦</span>
+                    Procurement Summary
+                </button>
+
+            </div>
+
+            <div class="sidebar-footer">
+
+                <div class="status-indicator" id="sidebarStatus">
+                    <span></span>
+                    <span id="sidebarStatusText">System Online</span>
+                </div>
+
+                <p>SIH 2026</p>
+                <small>Procurement Scheduling Platform</small>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTAINER -->
+        <main class="main" id="mainContainer">
+
+            <!-- ============================================ -->
+            <!-- LANGUAGE SELECTION SCREEN                     -->
+            <!-- ============================================ -->
+            <section class="language-selection-screen" id="languageScreen">
+
+                <div class="lang-card-box">
+
+                    <div class="lang-hero-icon">
+                        🤖
+                    </div>
+
+                    <h1 class="lang-hero-title">
+                        ProcureAI
+                    </h1>
+
+                    <p class="lang-hero-subtitle">
+                        Select your language
+                    </p>
+
+                    <div class="lang-options-grid">
+
+                        <button class="lang-card" data-lang="english" onclick="selectLanguage('english')" aria-label="Select English">
+                            <span class="lang-flag">🇬🇧</span>
+                            <div class="lang-meta">
+                                <span class="lang-name">English</span>
+                                <small class="lang-desc">Procurement Intelligence</small>
+                            </div>
+                            <span class="lang-chevron">→</span>
+                        </button>
+
+                        <button class="lang-card" data-lang="hindi" onclick="selectLanguage('hindi')" aria-label="हिन्दी चुनें">
+                            <span class="lang-flag">🇮🇳</span>
+                            <div class="lang-meta">
+                                <span class="lang-name">हिन्दी</span>
+                                <small class="lang-desc">प्रोक्योरमेंट विश्लेषण</small>
+                            </div>
+                            <span class="lang-chevron">→</span>
+                        </button>
+
+                        <button class="lang-card" data-lang="marathi" onclick="selectLanguage('marathi')" aria-label="मराठी निवडा">
+                            <span class="lang-flag">🇲🇭</span>
+                            <div class="lang-meta">
+                                <span class="lang-name">मराठी</span>
+                                <small class="lang-desc">खरेदी व पुरवठा विश्लेषण</small>
+                            </div>
+                            <span class="lang-chevron">→</span>
+                        </button>
+
+                    </div>
+
+                    <div class="lang-card-footer">
+                        <span>SIH 2026 Procurement Assistant</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ============================================ -->
+            <!-- CHATBOT PANEL SCREEN                          -->
+            <!-- ============================================ -->
+            <div class="chat-screen" id="chatScreen" style="display: none;">
+
+                <!-- HEADER -->
+                <header class="header">
+
+                    <div class="assistant">
+
+                        <div class="avatar">
+                            🤖
+                        </div>
+
+                        <div>
+                            <div class="assistant-title-row">
+                                <h3>ProcureAI</h3>
+                                <span class="badge-sih">SIH26032</span>
+                            </div>
+
+                            <div class="online" id="headerStatus">
+                                <span></span>
+                                <span id="headerStatusText">Online</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- HEADER RIGHT CONTROLS: LANGUAGE DROPDOWN -->
+                    <div class="header-controls">
+
+                        <div class="header-lang-wrapper" id="headerLangWrapper">
+
+                            <button class="header-lang-button" id="headerLangBtn" onclick="toggleLanguageDropdown(event)" aria-label="Change Language">
+                                <span class="header-lang-flag" id="headerLangFlag">🇬🇧</span>
+                                <span class="header-lang-text" id="headerLangText">English</span>
+                                <span class="header-lang-caret">▾</span>
+                            </button>
+
+                            <div class="header-lang-dropdown" id="headerLangDropdown">
+                                <div class="dropdown-header">Response Language</div>
+                                <button class="dropdown-item" onclick="changeSessionLanguage('english')" id="menu-lang-english">
+                                    <span class="item-flag">🇬🇧</span>
+                                    <span class="item-text">English</span>
+                                    <span class="item-check" id="check-english">✓</span>
+                                </button>
+                                <button class="dropdown-item" onclick="changeSessionLanguage('hindi')" id="menu-lang-hindi">
+                                    <span class="item-flag">🇮🇳</span>
+                                    <span class="item-text">हिन्दी</span>
+                                    <span class="item-check" id="check-hindi"></span>
+                                </button>
+                                <button class="dropdown-item" onclick="changeSessionLanguage('marathi')" id="menu-lang-marathi">
+                                    <span class="item-flag">🇲🇭</span>
+                                    <span class="item-text">मराठी</span>
+                                    <span class="item-check" id="check-marathi"></span>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </header>
+
+
+                <!-- CHAT AREA -->
+                <section class="chat-area" id="chatArea">
+
+                    <!-- WELCOME BANNER (LOCALIZED) -->
+                    <div class="welcome" id="welcome">
+
+                        <div class="welcome-icon">
+                            🤖
+                        </div>
+
+                        <h1 id="welcomeTitle">
+                            Hello! I’m ProcureAI.
+                        </h1>
+
+                        <p id="welcomeDescription">
+                            I can help you analyze your procurement data and identify risks, delays, supplier performance, and financial exposure.
+                            <br><br>
+                            What would you like to know?
+                        </p>
+
+                    </div>
+
+
+                    <!-- SUGGESTIONS SECTION (LOCALIZED) -->
+                    <div class="suggestions-container" id="suggestionsWrapper">
+
+                        <div class="suggestions-header" id="suggestionsHeader">
+                            💡 Suggested questions
+                        </div>
+
+                        <div class="suggestions" id="suggestions">
+                            <!-- Populated dynamically by app.js based on selected language -->
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- INPUT -->
+                <div class="input-wrapper">
+
+                    <div class="input-box">
+
+                        <textarea
+                            id="messageInput"
+                            placeholder="Ask anything about procurement..."
+                            rows="1"></textarea>
+
+                        <button id="sendButton" aria-label="Send message" title="Send message">
+                            ➤
+                        </button>
+
+                    </div>
+
+                    <div class="disclaimer">
+                        ProcureAI may make mistakes. Verify critical procurement information.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
