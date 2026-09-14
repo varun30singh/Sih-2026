@@ -1,28 +1,31 @@
-# Python virtual environment
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.pyc
 venv/
 .venv/
 
-# Python cache
-__pycache__/
-*.py[cod]
-*.pyo
+# =========================
+# Node / Next.js
+# =========================
+node_modules/
+.next/
+out/
+*.tsbuildinfo
 
-# Environment variables / secrets
-.env
-.env.*
-!.env.example
-
-# Database files
+# =========================
+# Local database
+# =========================
 *.db
-*.sqlite
-*.sqlite3
 
+# =========================
 # macOS
+# =========================
 .DS_Store
-
-# IDE
-.vscode/
-.idea/
-
-# Logs
-*.log
