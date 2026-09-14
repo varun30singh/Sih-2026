@@ -145,8 +145,13 @@ def correct_common_typos(text: str) -> str:
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-MEMORY_FILE = os.path.join(BASE_DIR, "memory.json")
-HISTORY_FILE = os.path.join(BASE_DIR, "chat_history.json")
+MEMORY_FILE = os.path.join(BASE_DIR, "memory", "memory.json")
+if not os.path.exists(os.path.dirname(MEMORY_FILE)):
+    MEMORY_FILE = os.path.join(BASE_DIR, "memory.json")
+
+HISTORY_FILE = os.path.join(BASE_DIR, "chat_history", "chat_history.json")
+if not os.path.exists(os.path.dirname(HISTORY_FILE)):
+    HISTORY_FILE = os.path.join(BASE_DIR, "chat_history.json")
 
 BOT_NAME = "ProcureAI"
 

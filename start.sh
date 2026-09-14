@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
-# ProcureAI Startup Script
+# ============================================================
+# MandiSetu & ProcureAI Startup Script
+# Smart India Hackathon 2026
+# ============================================================
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$DIR"
+
+if [ -f "scripts/start.sh" ]; then
+    exec ./scripts/start.sh "$@"
+fi
 
 if [ -d "venv" ]; then
     echo "⚡ Activating virtual environment..."

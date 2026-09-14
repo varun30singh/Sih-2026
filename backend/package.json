@@ -1,0 +1,17 @@
+{
+  "name": "mandisetu-backend",
+  "version": "1.0.0",
+  "description": "MandiSetu NestJS & Node.js Application Backend for Smart Procurement Logistics",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/main.js",
+    "start:dev": "node dist/main.js",
+    "type-check": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.17.10",
+    "typescript": "^5.7.2"
+  }
+}

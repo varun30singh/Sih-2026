@@ -5,28 +5,38 @@ import os
 import sys
 
 # =========================================================
+# =========================================================
 # PATH CONFIGURATION
 # =========================================================
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
+BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(BACKEND_DIR)
 
-DATABASE_PATH = os.path.join(
-    BASE_DIR,
-    "database",
-    "procurement.db"
-)
+# Locate frontend files (check legacy-chatbot directory first, then root frontend)
+if os.path.exists(os.path.join(BASE_DIR, "frontend", "legacy-chatbot", "index.html")):
+    FRONTEND_DIR = os.path.join(BASE_DIR, "frontend", "legacy-chatbot")
+elif os.path.exists(os.path.join(BASE_DIR, "frontend", "index.html")):
+    FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
+else:
+    FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
 
-CHATBOT_PATH = os.path.join(
-    BASE_DIR,
-    "chatbot"
-)
+DATABASE_PATH = os.path.join(BASE_DIR, "database", "procurement.db")
+if not os.path.exists(DATABASE_PATH):
+    DATABASE_PATH = os.path.join(BACKEND_DIR, "database", "procurement.db")
 
-# Allow Python to find assistant.py
+CHATBOT_PATH = os.path.join(BASE_DIR, "chatbot")
+if not os.path.exists(CHATBOT_PATH):
+    CHATBOT_PATH = os.path.join(BACKEND_DIR, "chatbot")
+
+# Allow Python to import assistant from the chatbot directory
 if CHATBOT_PATH not in sys.path:
     sys.path.append(CHATBOT_PATH)
 
-from assistant import process_message, process_message_with_suggestions
+try:
+    from assistant import process_message, process_message_with_suggestions
+except ImportError:
+    process_message = None
+    process_message_with_suggestions = None
 
 # =========================================================
 # FLASK CONFIGURATION
@@ -45,8 +55,28 @@ CORS(app)
 # =========================================================
 
 def get_db_connection():
+    db_dir = os.path.dirname(DATABASE_PATH)
+    if db_dir and not os.path.exists(db_dir):
+        os.makedirs(db_dir, exist_ok=True)
     connection = sqlite3.connect(DATABASE_PATH)
     connection.row_factory = sqlite3.Row
+
+    # Ensure table exists
+    cursor = connection.cursor()
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='procurements'")
+    if not cursor.fetchone():
+        try:
+            database_py = os.path.join(BASE_DIR, "database", "database.py")
+            if os.path.exists(database_py):
+                import importlib.util
+                spec = importlib.util.spec_from_file_location("db_init", database_py)
+                db_init = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(db_init)
+                db_init.create_tables()
+                db_init.insert_sample_data()
+        except Exception as e:
+            print(f"Warning: Auto-init database failed: {e}")
+
     return connection
 
 
@@ -56,17 +86,44 @@ def get_db_connection():
 
 @app.route("/")
 def index():
-    """Serve the main frontend application."""
-    return send_from_directory(FRONTEND_DIR, "index.html")
+    """Serve frontend index if present, or return service overview JSON."""
+    index_file = os.path.join(FRONTEND_DIR, "index.html")
+    if os.path.isfile(index_file):
+        return send_from_directory(FRONTEND_DIR, "index.html")
+    return jsonify({
+        "service": "ProcureAI Intelligence & Chatbot Service",
+        "status": "online",
+        "mandi_frontend": "http://localhost:3000",
+        "api_endpoints": {
+            "overview": "/api",
+            "health": "/api/health",
+            "chat": "/api/chat (POST)",
+            "procurements": "/api/procurements"
+        }
+    })
+
+
+@app.route("/legacy-chatbot")
+@app.route("/legacy-chatbot/")
+def legacy_chatbot_index():
+    """Serve legacy chatbot index or API status."""
+    return index()
 
 
 @app.route("/<path:path>")
 def static_proxy(path):
-    """Serve static assets or fallback to index.html."""
+    """Serve static assets or fallback to index or 404."""
     target = os.path.join(FRONTEND_DIR, path)
     if os.path.isfile(target):
         return send_from_directory(FRONTEND_DIR, path)
-    return send_from_directory(FRONTEND_DIR, "index.html")
+    index_file = os.path.join(FRONTEND_DIR, "index.html")
+    if os.path.isfile(index_file):
+        return send_from_directory(FRONTEND_DIR, "index.html")
+    return jsonify({
+        "error": "Not Found",
+        "path": f"/{path}",
+        "message": "Resource not found on ProcureAI service."
+    }), 404
 
 
 # =========================================================
@@ -109,10 +166,12 @@ def health():
 
         connection.close()
 
+        chatbot_ready = (process_message is not None or process_message_with_suggestions is not None)
+
         return jsonify({
             "status": "healthy",
             "database": "connected",
-            "chatbot": "connected"
+            "chatbot": "connected" if chatbot_ready else "unavailable"
         })
 
     except Exception as error:
@@ -348,14 +407,27 @@ def chat():
         language = data.get("language")
 
         # Send message to Procurement AI
-        try:
-            response, suggested_questions, resolved_language = process_message_with_suggestions(
-                message, language=language
-            )
-        except Exception:
+        if process_message_with_suggestions:
+            try:
+                response, suggested_questions, resolved_language = process_message_with_suggestions(
+                    message, language=language
+                )
+            except Exception as exc:
+                if process_message:
+                    response = process_message(message, language=language)
+                    suggested_questions = []
+                    resolved_language = language
+                else:
+                    raise exc
+        elif process_message:
             response = process_message(message, language=language)
             suggested_questions = []
             resolved_language = language
+        else:
+            return jsonify({
+                "success": False,
+                "error": "ProcureAI assistant engine is currently unavailable."
+            }), 503
 
         # Return AI response with suggested questions
         return jsonify({
