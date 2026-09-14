@@ -8,5 +8,5 @@ if [ -d "venv" ]; then
     source venv/bin/activate
 fi
 python database/database.py
-python seed_data.py
+python backend/seed_data.py
 echo "✅ Database seeded successfully."

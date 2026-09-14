@@ -189,13 +189,13 @@ npm --prefix backend install
 # Set up Python virtual environment
 python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
 ### 4. Initialize Demo Database
 ```bash
 python database/database.py
-python seed_data.py
+python backend/seed_data.py
 ```
 
 ---
@@ -477,7 +477,7 @@ venv\Scripts\activate
 
 Install Python dependencies:
 
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 
 Configure the required environment variables in .env.
 
