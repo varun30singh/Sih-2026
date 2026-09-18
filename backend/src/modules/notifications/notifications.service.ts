@@ -1,4 +1,5 @@
-import { Injectable, createSuccessResponse } from '../../common';
+import { Injectable } from '@nestjs/common';
+import { createSuccessResponse } from '../../common';
 
 @Injectable()
 export class NotificationsService {

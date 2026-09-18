@@ -1,4 +1,5 @@
-import { Injectable, createSuccessResponse, createErrorResponse } from '../../common';
+import { Injectable } from '@nestjs/common';
+import { createSuccessResponse, createErrorResponse } from '../../common';
 import * as http from 'http';
 
 @Injectable()

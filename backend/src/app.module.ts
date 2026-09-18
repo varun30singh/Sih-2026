@@ -1,4 +1,4 @@
-import { Module } from './common';
+import { Module } from '@nestjs/common';
 import { ConfigService } from './config';
 import { FarmersModule } from './modules/farmers/farmers.module';
 import { CentresModule } from './modules/centres/centres.module';

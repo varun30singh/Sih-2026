@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Query, Body } from '../../common';
+import { Controller, Get, Post, Query, Body } from '@nestjs/common';
 import { QueueService } from './queue.service';
 
 @Controller('admin/queue')

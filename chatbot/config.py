@@ -66,6 +66,35 @@ LLM_ENABLED = os.getenv(
 
 
 # ============================================================
+# GEMINI CONFIGURATION (AGRICULTURAL INTELLIGENCE)
+# ============================================================
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+
+# Default to current stable flash model (gemini-3.8-flash)
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash").strip()
+if not GEMINI_MODEL or GEMINI_MODEL in ["gemini-2.5-flash", "gemini-2.0-flash"]:
+    GEMINI_MODEL = "gemini-3.8-flash"
+
+
+GEMINI_TIMEOUT = int(os.getenv("GEMINI_TIMEOUT", "30"))
+
+GEMINI_ENABLED = os.getenv(
+    "GEMINI_ENABLED",
+    "true"
+).lower() in ("1", "true", "yes", "on") and bool(GEMINI_API_KEY)
+
+
+# ============================================================
+# WEB SEARCH CONFIGURATION
+# ============================================================
+
+WEB_SEARCH_API_KEY = os.getenv("WEB_SEARCH_API_KEY", "").strip()
+WEB_SEARCH_PROVIDER = os.getenv("WEB_SEARCH_PROVIDER", "tavily").strip().lower()
+WEB_SEARCH_TIMEOUT = int(os.getenv("WEB_SEARCH_TIMEOUT", "15"))
+
+
+# ============================================================
 # ASSISTANT CONFIGURATION
 # ============================================================
 
@@ -128,6 +157,9 @@ def get_config():
         "llm_enabled": LLM_ENABLED,
         "llm_model": LLM_MODEL,
         "llm_api_key_configured": bool(LLM_API_KEY),
+        "gemini_configured": bool(GEMINI_API_KEY),
+        "gemini_model": GEMINI_MODEL,
+        "gemini_enabled": GEMINI_ENABLED,
         "database_path": DATABASE_PATH,
         "database_exists": os.path.exists(DATABASE_PATH),
         "debug_mode": DEBUG_MODE,
