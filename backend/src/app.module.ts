@@ -11,6 +11,7 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
 import { RecommendationsModule } from './modules/recommendations/recommendations.module';
 import { ChatbotModule } from './modules/chatbot/chatbot.module';
 import { RetailUsersModule } from './modules/retail-users/retail-users.module';
+import { StockistsModule } from './modules/stockists/stockists.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { RetailUsersModule } from './modules/retail-users/retail-users.module';
     RecommendationsModule,
     ChatbotModule,
     RetailUsersModule,
+    StockistsModule,
   ],
   providers: [ConfigService],
   exports: [ConfigService],
