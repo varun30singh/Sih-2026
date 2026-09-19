@@ -8,6 +8,30 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- ------------------------------------------------------------
+-- 0. RETAIL USERS TABLE
+-- ------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS retail_users (
+    id VARCHAR(64) PRIMARY KEY,
+    user_id VARCHAR(64) NOT NULL,
+    business_name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_retail_users_user_id ON retail_users(user_id);
+
+-- ------------------------------------------------------------
+-- 0.1 STOCKISTS TABLE
+-- ------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS stockists (
+    id VARCHAR(64) PRIMARY KEY,
+    user_id VARCHAR(64) NOT NULL,
+    business_name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_stockists_user_id ON stockists(user_id);
+
+-- ------------------------------------------------------------
 -- 1. FARMERS TABLE
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS farmers (

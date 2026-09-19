@@ -4,6 +4,7 @@ import { createErrorResponse, createSuccessResponse } from '../../common';
 export interface RetailUser {
   id: string;
   userId: string;
+  businessName: string;
   createdAt: string;
 }
 
@@ -19,14 +20,15 @@ export class RetailUsersService {
     return createSuccessResponse(this.retailUsers.find(user => user.id === id) || null);
   }
 
-  create(retailUserData: { userId?: string }) {
-    if (!retailUserData.userId) {
-      return createErrorResponse('userId is required');
+  create(retailUserData: { userId?: string; businessName?: string }) {
+    if (!retailUserData.userId || !retailUserData.businessName) {
+      return createErrorResponse('userId and businessName are required');
     }
 
     const retailUser: RetailUser = {
       id: `retail-user-${Date.now().toString().slice(-8)}`,
       userId: retailUserData.userId,
+      businessName: retailUserData.businessName,
       createdAt: new Date().toISOString(),
     };
 

@@ -28,6 +28,8 @@ database/
 
 | Table | Purpose | Primary Key | Key Foreign Keys |
 |---|---|---|---|
+| `retail_users` | Retail-user records linked to an application user | `id` | - |
+| `stockists` | Stockist businesses linked to an application user | `id` | - |
 | `farmers` | Registered farmers with Aadhaar hash & land records | `id` | - |
 | `procurement_centres` | Mandis with coordinates, capacities & processing speeds | `id` | - |
 | `slots` | Daily delivery time windows per centre | `id` | `centre_id` |

@@ -16,7 +16,7 @@ export class RetailUsersController {
   }
 
   @Post()
-  createRetailUser(@Body() body: { userId?: string }) {
+  createRetailUser(@Body() body: { userId?: string; businessName?: string }) {
     return this.retailUsersService.create(body);
   }
 }
