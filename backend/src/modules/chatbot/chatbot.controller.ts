@@ -3,15 +3,25 @@ import { ChatbotService } from './chatbot.service';
 
 @Controller('chatbot')
 export class ChatbotController {
-  constructor(private readonly chatbotService: ChatbotService) {}
+  constructor(
+    private readonly chatbotService: ChatbotService,
+  ) {}
 
   @Get('health')
-  getChatbotHealth() {
-    return this.chatbotService.checkHealth();
+  async getChatbotHealth() {
+    return await this.chatbotService.checkHealth();
   }
 
   @Post('chat')
-  askQuestion(@Body() body: any) {
-    return this.chatbotService.askChatbot(body?.message || '', body?.language || 'english');
+  async askQuestion(
+    @Body() body: {
+      message?: string;
+      language?: string;
+    },
+  ) {
+    return await this.chatbotService.askChatbot(
+      body?.message || '',
+      body?.language || 'english',
+    );
   }
 }

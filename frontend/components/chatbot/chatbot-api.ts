@@ -1,6 +1,6 @@
 /**
- * MandiSetu Integrated ProcureAI Chatbot API Client
- * Connects frontend directly to the existing ProcureAI Python Intelligence backend.
+ * MandiSetu Chatbot API Client
+ * Connects the frontend to the NestJS chatbot backend.
  */
 
 export interface ChatHealthStatus {
@@ -19,75 +19,83 @@ export interface ChatResponse {
   suggestedQuestions: string[];
 }
 
-const CANDIDATE_BASE_URLS = [
-  // 1. Direct local Python Flask server
-  'http://127.0.0.1:5000/api',
-  // 2. Next.js internal rewrite proxy
-  '/api/chatbot',
-  // 3. Localhost hostname fallback
-  'http://localhost:5000/api',
-];
+// Next.js rewrite proxies this to:
+// http://localhost:4000/api/chatbot
+const CHATBOT_BASE_URL = '/api/chatbot';
 
-let activeApiBase = 'http://127.0.0.1:5000/api';
+let activeApiBase = CHATBOT_BASE_URL;
 
 /**
- * Verifies live connection to the ProcureAI chatbot backend.
- * Dynamically identifies the reachable endpoint and accurately reports online/offline state.
+ * Check whether the NestJS chatbot backend is online.
  */
 export async function checkChatbotHealth(): Promise<ChatHealthStatus> {
-  for (const base of CANDIDATE_BASE_URLS) {
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2500);
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-      const res = await fetch(`${base}/health`, {
-        signal: controller.signal,
-        headers: { 'Accept': 'application/json' },
-      });
-      clearTimeout(timeoutId);
+    const res = await fetch(`${CHATBOT_BASE_URL}/health`, {
+      method: 'GET',
+      signal: controller.signal,
+      headers: {
+        Accept: 'application/json',
+      },
+      cache: 'no-store',
+    });
 
-      if (res.ok) {
-        const data = await res.json();
-        if (data.status === 'healthy' || data.status === 'online') {
-          activeApiBase = base;
-          return {
-            isOnline: true,
-            status: 'healthy',
-            database: data.database || 'connected',
-            chatbot: data.chatbot || 'connected',
-            endpoint: base,
-          };
-        }
-      }
-    } catch {
-      // Continue to next candidate URL
+    clearTimeout(timeoutId);
+
+    if (!res.ok) {
+      throw new Error(`Health check failed: HTTP ${res.status}`);
     }
-  }
 
-  return {
-    isOnline: false,
-    status: 'offline',
-    endpoint: activeApiBase,
-  };
+    const data = await res.json();
+
+    if (data.status === 'healthy' || data.status === 'online') {
+      activeApiBase = CHATBOT_BASE_URL;
+
+      return {
+        isOnline: true,
+        status: data.status,
+        database: data.database || 'connected',
+        chatbot: data.chatbot || 'connected',
+        endpoint: CHATBOT_BASE_URL,
+      };
+    }
+
+    return {
+      isOnline: false,
+      status: 'offline',
+      endpoint: CHATBOT_BASE_URL,
+    };
+  } catch (error) {
+    console.error('Chatbot health check failed:', error);
+
+    return {
+      isOnline: false,
+      status: 'offline',
+      endpoint: CHATBOT_BASE_URL,
+    };
+  }
 }
 
 /**
- * Sends a message to the ProcureAI assistant and returns the AI response with follow-up suggestions.
+ * Send a message to the NestJS chatbot.
  */
 export async function sendChatbotMessage(
   message: string,
   language: 'english' | 'hindi' | 'marathi' = 'english',
   contextToken?: string
 ): Promise<ChatResponse> {
-  // Check health and locate active endpoint
+  // Make sure the backend is reachable.
   const health = await checkChatbotHealth();
+
   if (!health.isOnline) {
     const errorMsg =
       language === 'hindi'
-        ? 'क्षमा करें, ProcureAI सहायक सर्वर अभी उपलब्ध नहीं है। कृपया कुछ क्षणों बाद पुनः प्रयास करें।'
+        ? 'क्षमा करें, MandiSetu सहायक सर्वर अभी उपलब्ध नहीं है। कृपया कुछ क्षणों बाद पुनः प्रयास करें।'
         : language === 'marathi'
-        ? 'माफ करा, ProcureAI सहाय्यक सर्व्हर सध्या उपलब्ध नाही. कृपया काही वेळानंतर पुन्हा प्रयत्न करा.'
-        : 'I’m unable to connect to the ProcureAI server right now. Please check if the backend is running and try again.';
+        ? 'माफ करा, MandiSetu सहाय्यक सर्व्हर सध्या उपलब्ध नाही. कृपया काही वेळानंतर पुन्हा प्रयत्न करा.'
+        : 'I’m unable to connect to the MandiSetu assistant right now. Please try again in a moment.';
 
     return {
       success: false,
@@ -98,10 +106,15 @@ export async function sendChatbotMessage(
     };
   }
 
-  // Prepend context hint if token is known and user question is vague
   let outgoingMessage = message.trim();
+
+  // Add token context when appropriate.
   if (contextToken && !outgoingMessage.includes(contextToken)) {
-    const isTokenQuestion = /token|wait|queue|turn|status|समय|टोकन|कतार|वेळ/i.test(outgoingMessage);
+    const isTokenQuestion =
+      /token|wait|queue|turn|status|समय|टोकन|कतार|वेळ|रांग/i.test(
+        outgoingMessage
+      );
+
     if (isTokenQuestion) {
       outgoingMessage = `${outgoingMessage} (Context: Token ${contextToken})`;
     }
@@ -109,13 +122,13 @@ export async function sendChatbotMessage(
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 12000);
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
 
     const res = await fetch(`${activeApiBase}/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Accept: 'application/json',
       },
       body: JSON.stringify({
         message: outgoingMessage,
@@ -123,30 +136,44 @@ export async function sendChatbotMessage(
       }),
       signal: controller.signal,
     });
+
     clearTimeout(timeoutId);
 
     if (!res.ok) {
-      throw new Error(`Server returned HTTP ${res.status}`);
+      const errorText = await res.text().catch(() => '');
+      throw new Error(
+        `Chatbot returned HTTP ${res.status}${errorText ? `: ${errorText}` : ''}`
+      );
     }
 
     const data = await res.json();
+
     return {
-      success: true,
+      success: data.success !== false,
       message,
-      response: data.response || 'No response generated.',
+      response:
+        data.response ||
+        data.message ||
+        'Sorry, I could not generate a response.',
       language: data.language || language,
-      suggestedQuestions: data.suggested_questions && data.suggested_questions.length > 0
-        ? data.suggested_questions
-        : getDefaultSuggestions(language),
+      suggestedQuestions:
+        Array.isArray(data.suggested_questions) &&
+        data.suggested_questions.length > 0
+          ? data.suggested_questions
+          : Array.isArray(data.suggestedQuestions) &&
+            data.suggestedQuestions.length > 0
+          ? data.suggestedQuestions
+          : getDefaultSuggestions(language),
     };
-  } catch (err: any) {
-    console.error('ProcureAI Message Request Error:', err);
+  } catch (error) {
+    console.error('MandiSetu Chatbot Request Error:', error);
+
     const fallbackMsg =
       language === 'hindi'
         ? 'नेटवर्क त्रुटि के कारण आपका संदेश संसाधित नहीं हो सका। कृपया पुनः प्रयास करें।'
         : language === 'marathi'
         ? 'नेटवर्क त्रुटीमुळे तुमचा संदेश पाठवता आला नाही. कृपया पुन्हा प्रयत्न करा.'
-        : 'Sorry, I couldn’t process that request right now. Please verify your connection and try again.';
+        : 'Sorry, I couldn’t process that request right now. Please try again.';
 
     return {
       success: false,
@@ -159,26 +186,30 @@ export async function sendChatbotMessage(
 }
 
 /**
- * Default fallback questions by language.
+ * Default suggested questions.
  */
-export function getDefaultSuggestions(language: 'english' | 'hindi' | 'marathi' = 'english'): string[] {
+export function getDefaultSuggestions(
+  language: 'english' | 'hindi' | 'marathi' = 'english'
+): string[] {
   switch (language) {
     case 'hindi':
       return [
         'विलंबित प्रोक्योरमेंट दिखाएं',
         'मेरा टोकन M-142 कहाँ है?',
         'कतार में कितना समय लगेगा?',
-        'सबसे महत्वपूर्ण प्रोक्योरमेंट कौन सा है?',
+        'सबसे कम प्रतीक्षा वाला केंद्र कौन सा है?',
         'प्रोक्योरमेंट का सारांश बताएं',
       ];
+
     case 'marathi':
       return [
         'विलंबित खरेदी दाखवा',
         'माझा टोकन M-142 कुठे आहे?',
         'रांगेत किती वेळ लागेल?',
-        'सर्वात तातडीची खरेदी कोणती आहे?',
+        'सर्वात कमी प्रतीक्षा असलेले केंद्र कोणते?',
         'खरेदीचा सारांश द्या',
       ];
+
     case 'english':
     default:
       return [
