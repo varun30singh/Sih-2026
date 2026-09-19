@@ -10,6 +10,7 @@ import { PaymentsModule } from './modules/payments/payments.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
 import { RecommendationsModule } from './modules/recommendations/recommendations.module';
 import { ChatbotModule } from './modules/chatbot/chatbot.module';
+import { RetailUsersModule } from './modules/retail-users/retail-users.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ChatbotModule } from './modules/chatbot/chatbot.module';
     NotificationsModule,
     RecommendationsModule,
     ChatbotModule,
+    RetailUsersModule,
   ],
   providers: [ConfigService],
   exports: [ConfigService],
