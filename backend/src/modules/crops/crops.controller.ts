@@ -1,32 +1,55 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { Crop, CropsService } from './crops.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { CropsService } from './crops.service';
 
 @Controller('crops')
 export class CropsController {
   constructor(private readonly cropsService: CropsService) {}
 
   @Get()
-  getAllCrops() {
+  findAll() {
     return this.cropsService.findAll();
   }
 
   @Get(':id')
-  getCropById(@Param('id') id: string) {
-    return this.cropsService.findById(id);
+  findOne(@Param('id') id: string) {
+    return this.cropsService.findOne(Number(id));
   }
 
   @Post()
-  createCrop(@Body() body: Partial<Crop>) {
+  create(
+    @Body()
+    body: {
+      name: string;
+      mspRate: number;
+      unit: string;
+    },
+  ) {
     return this.cropsService.create(body);
   }
 
   @Patch(':id')
-  updateCrop(@Param('id') id: string, @Body() body: Partial<Crop>) {
-    return this.cropsService.update(id, body);
+  update(
+    @Param('id') id: string,
+    @Body()
+    body: {
+      name?: string;
+      mspRate?: number;
+      unit?: string;
+    },
+  ) {
+    return this.cropsService.update(Number(id), body);
   }
 
   @Delete(':id')
-  deleteCrop(@Param('id') id: string) {
-    return this.cropsService.remove(id);
+  remove(@Param('id') id: string) {
+    return this.cropsService.remove(Number(id));
   }
 }

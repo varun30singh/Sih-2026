@@ -5,6 +5,5 @@ import { CropsService } from './crops.service';
 @Module({
   controllers: [CropsController],
   providers: [CropsService],
-  exports: [CropsService],
 })
 export class CropsModule {}
