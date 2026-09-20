@@ -1,0 +1,308 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model audit_logs {
+  id          Int      @id @default(autoincrement())
+  user_id     Int?
+  action      String   @db.VarChar(255)
+  entity_type String   @db.VarChar(100)
+  entity_id   Int?
+  timestamp   DateTime @default(now()) @db.Timestamptz(6)
+  details     Json?
+  users       users?   @relation(fields: [user_id], references: [id], onUpdate: NoAction)
+
+  @@index([entity_type, entity_id], map: "idx_audit_logs_entity")
+  @@index([user_id], map: "idx_audit_logs_user")
+}
+
+model bookings {
+  id                Int            @id @default(autoincrement())
+  farmer_id         Int
+  slot_id           Int
+  crop_id           Int
+  quantity_estimate Decimal?       @db.Decimal(10, 2)
+  token_number      String         @db.VarChar(10)
+  status            booking_status @default(booked)
+  booked_by         booked_by_type @default(self)
+  created_at        DateTime       @default(now()) @db.Timestamptz(6)
+  crops             crops          @relation(fields: [crop_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  farmers           farmers        @relation(fields: [farmer_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  slots             slots          @relation(fields: [slot_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  procurements      procurements[]
+  queue             queue[]
+
+  @@unique([slot_id, token_number])
+  @@index([slot_id], map: "idx_bookings_slot")
+  @@index([status], map: "idx_bookings_status")
+}
+
+model brokers {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  users      users    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  orders     orders[]
+}
+
+model buyers {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  users      users    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  orders     orders[]
+}
+
+model crops {
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(255)
+  msp_rate Decimal    @db.Decimal(10, 2)
+  unit     String     @default("quintal") @db.VarChar(20)
+  bookings bookings[]
+  listings listings[]
+  slots    slots[]
+}
+
+model farmers {
+  id            Int             @id @default(autoincrement())
+  user_id       Int?
+  name          String          @db.VarChar(255)
+  id_proof      String?         @db.VarChar(50)
+  village       String?         @db.VarChar(255)
+  phone         String?         @db.VarChar(15)
+  created_at    DateTime        @default(now()) @db.Timestamptz(6)
+  stockist_id   Int?
+  bookings      bookings[]
+  stockists     stockists?      @relation(fields: [stockist_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users         users?          @relation(fields: [user_id], references: [id], onUpdate: NoAction)
+  ivrs_sessions ivrs_sessions[]
+  listings      listings[]
+
+  @@index([stockist_id], map: "idx_farmers_stockist_id")
+  @@index([user_id], map: "idx_farmers_user")
+}
+
+model ivrs_sessions {
+  id           Int       @id @default(autoincrement())
+  phone_number String    @db.VarChar
+  language     String?   @db.VarChar(2)
+  current_menu String?   @db.VarChar
+  attempts     Int       @default(0)
+  farmer_id    Int?
+  started_at   DateTime  @default(now()) @db.Timestamptz(6)
+  ended_at     DateTime? @db.Timestamptz(6)
+  farmers      farmers?  @relation(fields: [farmer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([phone_number], map: "idx_ivrs_sessions_phone")
+}
+
+model listings {
+  id                 Int            @id @default(autoincrement())
+  farmer_id          Int
+  stockist_id        Int
+  crop_id            Int
+  quantity_available Decimal        @db.Decimal
+  price              Decimal        @db.Decimal
+  status             listing_status @default(open)
+  created_at         DateTime       @default(now()) @db.Timestamptz(6)
+  crops              crops          @relation(fields: [crop_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  farmers            farmers        @relation(fields: [farmer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  stockists          stockists      @relation(fields: [stockist_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  orders             orders[]
+
+  @@index([farmer_id], map: "idx_listings_farmer_id")
+  @@index([stockist_id], map: "idx_listings_stockist_id")
+}
+
+model operators {
+  id                  Int                  @id @default(autoincrement())
+  user_id             Int
+  assigned_centre_id  Int?
+  procurement_centres procurement_centres? @relation(fields: [assigned_centre_id], references: [id], onUpdate: NoAction)
+  users               users                @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([assigned_centre_id], map: "idx_operators_centre")
+}
+
+model orders {
+  id         Int          @id @default(autoincrement())
+  listing_id Int
+  buyer_id   Int
+  broker_id  Int?
+  quantity   Decimal      @db.Decimal
+  amount     Decimal      @db.Decimal
+  status     order_status @default(pending)
+  created_at DateTime     @default(now()) @db.Timestamptz(6)
+  brokers    brokers?     @relation(fields: [broker_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  buyers     buyers       @relation(fields: [buyer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  listings   listings     @relation(fields: [listing_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([buyer_id], map: "idx_orders_buyer_id")
+  @@index([listing_id], map: "idx_orders_listing_id")
+}
+
+model payments {
+  id              Int            @id @default(autoincrement())
+  procurement_id  Int
+  amount          Decimal        @db.Decimal(12, 2)
+  status          payment_status @default(pending)
+  payment_mode    payment_mode?
+  transaction_ref String?        @db.VarChar(255)
+  paid_at         DateTime?      @db.Timestamptz(6)
+  procurements    procurements   @relation(fields: [procurement_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model procurement_centres {
+  id                Int         @id @default(autoincrement())
+  name              String      @db.VarChar(255)
+  location          String
+  capacity_per_slot Int
+  processing_rate   Int?
+  created_at        DateTime    @default(now()) @db.Timestamptz(6)
+  operators         operators[]
+  queue             queue[]
+  slots             slots[]
+}
+
+model procurements {
+  id              Int        @id @default(autoincrement())
+  booking_id      Int
+  actual_quantity Decimal    @db.Decimal(10, 2)
+  quality_grade   String?    @db.VarChar(20)
+  rate_applied    Decimal    @db.Decimal(10, 2)
+  total_amount    Decimal    @db.Decimal(12, 2)
+  procured_at     DateTime   @default(now()) @db.Timestamptz(6)
+  procured_by     Int?
+  payments        payments[]
+  bookings        bookings   @relation(fields: [booking_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users           users?     @relation(fields: [procured_by], references: [id], onUpdate: NoAction)
+}
+
+model queue {
+  id                  Int                 @id @default(autoincrement())
+  booking_id          Int
+  centre_id           Int
+  status              queue_status        @default(waiting)
+  entered_at          DateTime            @default(now()) @db.Timestamptz(6)
+  called_at           DateTime?           @db.Timestamptz(6)
+  bookings            bookings            @relation(fields: [booking_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  procurement_centres procurement_centres @relation(fields: [centre_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([centre_id, status], map: "idx_queue_centre_status")
+}
+
+model retail_users {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  users      users    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model slots {
+  id                  Int                 @id @default(autoincrement())
+  centre_id           Int
+  crop_id             Int
+  date                DateTime            @db.Date
+  start_time          DateTime            @db.Time(6)
+  end_time            DateTime            @db.Time(6)
+  capacity            Int
+  booked_count        Int                 @default(0)
+  created_at          DateTime            @default(now()) @db.Timestamptz(6)
+  bookings            bookings[]
+  procurement_centres procurement_centres @relation(fields: [centre_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  crops               crops               @relation(fields: [crop_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([centre_id, date], map: "idx_slots_centre_date")
+}
+
+model stockists {
+  id            Int        @id @default(autoincrement())
+  user_id       Int
+  business_name String?    @db.VarChar
+  created_at    DateTime   @default(now()) @db.Timestamptz(6)
+  farmers       farmers[]
+  listings      listings[]
+  users         users      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model users {
+  id                 Int            @id @default(autoincrement())
+  phone              String         @unique @db.VarChar(15)
+  email              String?        @unique @db.VarChar(255)
+  password_hash      String
+  role               user_role
+  created_at         DateTime       @default(now()) @db.Timestamptz(6)
+  preferred_language String?        @db.VarChar(2)
+  audit_logs         audit_logs[]
+  brokers            brokers[]
+  buyers             buyers[]
+  farmers            farmers[]
+  operators          operators[]
+  procurements       procurements[]
+  retail_users       retail_users[]
+  stockists          stockists[]
+
+  @@index([phone], map: "idx_users_phone")
+  @@index([role], map: "idx_users_role")
+}
+
+enum booked_by_type {
+  self
+  operator
+}
+
+enum booking_status {
+  booked
+  arrived
+  cancelled
+  no_show
+}
+
+enum listing_status {
+  open
+  closed
+  sold_out
+}
+
+enum order_status {
+  pending
+  confirmed
+  fulfilled
+  cancelled
+}
+
+enum payment_mode {
+  cash
+  upi
+  bank_transfer
+  cheque
+}
+
+enum payment_status {
+  pending
+  paid
+}
+
+enum queue_status {
+  waiting
+  quality_check
+  weighing
+  done
+}
+
+enum user_role {
+  farmer
+  operator
+  admin
+  stockist
+  broker
+  buyer
+  retail_user
+}

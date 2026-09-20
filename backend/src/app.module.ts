@@ -12,6 +12,10 @@ import { RecommendationsModule } from './modules/recommendations/recommendations
 import { ChatbotModule } from './modules/chatbot/chatbot.module';
 import { RetailUsersModule } from './modules/retail-users/retail-users.module';
 import { StockistsModule } from './modules/stockists/stockists.module';
+import { PrismaModule } from './common/prisma/prisma.module';
+import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { AuditLogModule } from './modules/audit-log/audit-log.module';
 
 @Module({
   imports: [
@@ -27,6 +31,10 @@ import { StockistsModule } from './modules/stockists/stockists.module';
     ChatbotModule,
     RetailUsersModule,
     StockistsModule,
+    PrismaModule,
+    UsersModule,
+    AuthModule,
+    AuditLogModule,
   ],
   providers: [ConfigService],
   exports: [ConfigService],
