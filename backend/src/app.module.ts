@@ -12,6 +12,7 @@ import { RecommendationsModule } from './modules/recommendations/recommendations
 import { ChatbotModule } from './modules/chatbot/chatbot.module';
 import { RetailUsersModule } from './modules/retail-users/retail-users.module';
 import { StockistsModule } from './modules/stockists/stockists.module';
+import { CropsModule } from './modules/crops/crops.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { StockistsModule } from './modules/stockists/stockists.module';
     ChatbotModule,
     RetailUsersModule,
     StockistsModule,
+    CropsModule,
   ],
   providers: [ConfigService],
   exports: [ConfigService],

@@ -60,6 +60,14 @@ export function Put(path: string = ''): MethodDecorator {
   };
 }
 
+export function Patch(path: string = ''): MethodDecorator {
+  return (target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor) => {
+    target[propertyKey].__httpMethod = 'PATCH';
+    target[propertyKey].__routePath = path;
+    return descriptor;
+  };
+}
+
 export function Delete(path: string = ''): MethodDecorator {
   return (target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor) => {
     target[propertyKey].__httpMethod = 'DELETE';
