@@ -16,6 +16,9 @@ import { PrismaModule } from './common/prisma/prisma.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuditLogModule } from './modules/audit-log/audit-log.module';
+import { ProcurementCentresModule } from './modules/procurement-centres/procurement-centres.module';
+import { SlotsModule } from './modules/slots/slots.module';
+import { ProcurementsModule } from './modules/procurements/procurements.module';
 
 @Module({
   imports: [
@@ -35,6 +38,9 @@ import { AuditLogModule } from './modules/audit-log/audit-log.module';
     UsersModule,
     AuthModule,
     AuditLogModule,
+    ProcurementCentresModule,
+    SlotsModule,
+    ProcurementsModule,
   ],
   providers: [ConfigService],
   exports: [ConfigService],

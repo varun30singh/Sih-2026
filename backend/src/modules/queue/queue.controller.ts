@@ -1,32 +1,60 @@
-import { Controller, Get, Post, Query, Body } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { CreateQueueDto, QueueStatus } from './dto/create-queue.dto';
+import { UpdateQueueDto } from './dto/update-queue.dto';
 import { QueueService } from './queue.service';
 
-@Controller('admin/queue')
+@Controller('queue')
 export class QueueController {
   constructor(private readonly queueService: QueueService) {}
 
-  @Get('state')
-  getLiveState(@Query('centreId') centreId: string) {
-    return this.queueService.getLiveState(centreId || 'centre-14');
+  @UseGuards(JwtAuthGuard)
+  @Post()
+  create(@Body() createQueueDto: CreateQueueDto) {
+    return this.queueService.create(createQueueDto);
   }
 
-  @Get('entries')
-  getQueueEntries(@Query('centreId') centreId: string) {
-    return this.queueService.getEntries(centreId || 'centre-14');
+  @Get()
+  findAll() {
+    return this.queueService.findAll();
   }
 
-  @Post('call-next')
-  callNextToken(@Body() body: any) {
-    return this.queueService.callNext(body?.centreId || 'centre-14', body?.currentTokenId || 'M-134');
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.queueService.findOne(id);
   }
 
-  @Post('hold')
-  holdToken(@Body() body: any) {
-    return this.queueService.hold(body?.tokenId || 'M-135', body?.reason || 'Calibration');
+  @UseGuards(JwtAuthGuard)
+  @Patch(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateQueueDto: UpdateQueueDto,
+  ) {
+    return this.queueService.update(id, updateQueueDto);
   }
 
-  @Post('complete')
-  completeToken(@Body() body: any) {
-    return this.queueService.complete(body?.tokenId || 'M-134');
+  @UseGuards(JwtAuthGuard)
+  @Patch(':id/status')
+  updateStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('status') status: QueueStatus,
+  ) {
+    return this.queueService.updateStatus(id, status);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.queueService.remove(id);
   }
 }
