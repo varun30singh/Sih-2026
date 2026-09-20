@@ -43,7 +43,7 @@ During peak rabi and kharif harvest seasons, millions of Indian farmers transpor
 ## 4. System Architecture
 
 ```text
-                                 MandiSetu Platform
+                                 Mandimitra Platform
                                          │
                  ┌───────────────────────┴───────────────────────┐
                  │                                               │
