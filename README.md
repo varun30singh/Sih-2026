@@ -1,5 +1,6 @@
 <<<<<<< HEAD
-# MandiSetu (मंडीसेतु)
+mandimitra
+
 
 > **Smart India Hackathon 2026 — Problem Statement SIH26032**  
 > *Agri-Tech Zero-Waiting Procurement Queue & Mandi Logistics Platform*
@@ -42,7 +43,7 @@ During peak rabi and kharif harvest seasons, millions of Indian farmers transpor
 ## 4. System Architecture
 
 ```text
-                                 MandiSetu Platform
+                                 Mandimitra Platform
                                          │
                  ┌───────────────────────┴───────────────────────┐
                  │                                               │

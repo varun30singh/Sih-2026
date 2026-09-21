@@ -19,6 +19,7 @@ import { AuditLogModule } from './modules/audit-log/audit-log.module';
 import { ProcurementCentresModule } from './modules/procurement-centres/procurement-centres.module';
 import { SlotsModule } from './modules/slots/slots.module';
 import { ProcurementsModule } from './modules/procurements/procurements.module';
+import { CropsModule } from './modules/crops/crops.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { ProcurementsModule } from './modules/procurements/procurements.module';
     ProcurementCentresModule,
     SlotsModule,
     ProcurementsModule,
+    CropsModule,
   ],
   providers: [ConfigService],
   exports: [ConfigService],
