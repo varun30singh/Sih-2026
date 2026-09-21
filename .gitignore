@@ -63,3 +63,9 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+backend/src/generated/
+backend/dist/
+backend/prisma.config.js
+backend/prisma.config.d.ts
+backend/prisma.config.js.map
