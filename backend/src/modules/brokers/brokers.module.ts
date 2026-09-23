@@ -1,4 +1,4 @@
-import { Module } from '../../common';
+import { Module } from '@nestjs/common';
 import { ConfigService } from '../../config';
 import { BrokersController } from './brokers.controller';
 import { BrokersService } from './brokers.service';
