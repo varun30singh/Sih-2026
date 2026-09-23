@@ -1,4 +1,4 @@
-import { Module } from '../../common';
+import { Module } from '@nestjs/common';
 import { ConfigService } from '../../config';
 import { BuyersController } from './buyers.controller';
 import { BuyersService } from './buyers.service';
