@@ -1,173 +1,5 @@
 [
   {
-    "timestamp": "2026-09-10T01:06:29.062875",
-    "user": "कोणत्या supplier ला सगळ्यात जास्त delay आहे?",
-    "assistant": "SKF India ला सगळ्यात जास्त delays आहेत — 2 delayed order(s).",
-    "intent": "supplier_delays",
-    "language": "marathi"
-  },
-  {
-    "timestamp": "2026-09-10T01:06:29.064479",
-    "user": "kis supplier ko sabse zyada delay hai?",
-    "assistant": "SKF India ko sabse zyada delays hain — 2 delayed order(s).",
-    "intent": "supplier_delays",
-    "language": "hinglish"
-  },
-  {
-    "timestamp": "2026-09-10T01:06:29.065359",
-    "user": "kitne?",
-    "assistant": "2 delayed orders.",
-    "intent": "supplier_delays",
-    "language": "hinglish"
-  },
-  {
-    "timestamp": "2026-09-10T01:06:29.067125",
-    "user": "किस supplier को सबसे ज्यादा delay है?",
-    "assistant": "SKF India में सबसे ज्यादा delays हैं — 2 delayed order(s)।",
-    "intent": "supplier_delays",
-    "language": "hindi"
-  },
-  {
-    "timestamp": "2026-09-10T01:06:29.068262",
-    "user": "कितने?",
-    "assistant": "2 delayed orders।",
-    "intent": "supplier_delays",
-    "language": "hindi"
-  },
-  {
-    "timestamp": "2026-09-10T01:06:29.069986",
-    "user": "kontya supplier la saglyat jast delay aahe?",
-    "assistant": "SKF India la saglyat jast delays aahet — 2 delayed order(s).",
-    "intent": "supplier_delays",
-    "language": "marathi_english"
-  },
-  {
-    "timestamp": "2026-09-10T01:06:29.070800",
-    "user": "kiti?",
-    "assistant": "2 delayed orders.",
-    "intent": "supplier_delays",
-    "language": "marathi_english"
-  },
-  {
-    "timestamp": "2026-09-10T01:06:29.072617",
-    "user": "कोणत्या supplier ला सगळ्यात जास्त delay आहे?",
-    "assistant": "SKF India ला सगळ्यात जास्त delays आहेत — 2 delayed order(s).",
-    "intent": "supplier_delays",
-    "language": "marathi"
-  },
-  {
-    "timestamp": "2026-09-10T01:06:29.073768",
-    "user": "किती?",
-    "assistant": "2 delayed orders.",
-    "intent": "supplier_delays",
-    "language": "marathi"
-  },
-  {
-    "timestamp": "2026-09-10T01:06:29.075843",
-    "user": "Which supplier has the most delays?",
-    "assistant": "SKF India has the highest number of delays with 2 delayed order(s).",
-    "intent": "supplier_delays",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:06:29.076728",
-    "user": "how many?",
-    "assistant": "2 delayed orders.",
-    "intent": "supplier_delays",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:06:29.078529",
-    "user": "Give me recommendations.",
-    "assistant": "Procurement recommendations:\n• [CRITICAL] SKF India has multiple critical orders requiring immediate attention.\n  Affected orders:\n  • PR007\n  • PR001\n  Action: Contact SKF India immediately, confirm delivery status, and evaluate an alternative procurement plan.\n• [CRITICAL] Tata Steel has a critical order requiring immediate attention.\n  Affected orders:\n  • PR002\n  Action: Contact Tata Steel, confirm delivery status, and evaluate an alternative procurement plan.\n• [HIGH] Significant financial exposure detected.\n  Affected orders:\n  • PR007\n  • PR001\n  Action: Prioritize these orders because delays could have a significant financial impact.\n• [HIGH] Supplier performance review required.\n  Affected suppliers:\n  • SKF India\n  • Tata Steel\n  Action: Review supplier SLA and delivery history and consider backup suppliers.\n• [MEDIUM] Delivery confirmation required for upcoming order(s) due within 3 days.\n  Affected orders:\n  • PR004\n  • PR003\n  • PR009\n  Action: Confirm delivery schedules with affected suppliers and monitor these orders closely.",
-    "intent": "recommendations",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:07:25.607361",
-    "user": "Which supplier has the most delays?",
-    "assistant": "SKF India has the highest number of delays with 2 delayed order(s).",
-    "intent": "supplier_delays",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:07:34.690635",
-    "user": "kis supplier ko sabse zyada delay hai?",
-    "assistant": "SKF India ko sabse zyada delays hain — 2 delayed order(s).",
-    "intent": "supplier_delays",
-    "language": "hinglish"
-  },
-  {
-    "timestamp": "2026-09-10T01:07:43.750607",
-    "user": "किस supplier को सबसे ज्यादा delay है?",
-    "assistant": "SKF India में सबसे ज्यादा delays हैं — 2 delayed order(s)।",
-    "intent": "supplier_delays",
-    "language": "hindi"
-  },
-  {
-    "timestamp": "2026-09-10T01:08:50.687346",
-    "user": "kontya supplier la saglyat jast delay aahe?",
-    "assistant": "SKF India la saglyat jast delays aahet — 2 delayed order(s).",
-    "intent": "supplier_delays",
-    "language": "marathi_english"
-  },
-  {
-    "timestamp": "2026-09-10T01:09:01.791880",
-    "user": "What is the procurement health score?",
-    "assistant": "Procurement Health Score: 46/100 (High Risk)\n• Total Orders: 12\n• Delayed Orders: 4 (33.3%)\n• Critical Orders: 3\n• High Risk Orders: 2",
-    "intent": "health",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:09:05.898125",
-    "user": "Give me recommendations.",
-    "assistant": "Procurement recommendations:\n• [CRITICAL] SKF India has multiple critical orders requiring immediate attention.\n  Affected orders:\n  • PR007\n  • PR001\n  Action: Contact SKF India immediately, confirm delivery status, and evaluate an alternative procurement plan.\n• [CRITICAL] Tata Steel has a critical order requiring immediate attention.\n  Affected orders:\n  • PR002\n  Action: Contact Tata Steel, confirm delivery status, and evaluate an alternative procurement plan.\n• [HIGH] Significant financial exposure detected.\n  Affected orders:\n  • PR007\n  • PR001\n  Action: Prioritize these orders because delays could have a significant financial impact.\n• [HIGH] Supplier performance review required.\n  Affected suppliers:\n  • SKF India\n  • Tata Steel\n  Action: Review supplier SLA and delivery history and consider backup suppliers.\n• [MEDIUM] Delivery confirmation required for upcoming order(s) due within 3 days.\n  Affected orders:\n  • PR004\n  • PR003\n  • PR009\n  Action: Confirm delivery schedules with affected suppliers and monitor these orders closely.",
-    "intent": "recommendations",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:10:25.848859",
-    "user": "Which orders are at risk?",
-    "assistant": "5 order(s) are currently at high or critical risk: 3 critical and 2 high risk.\n• PR007 (Gear Assemblies) — SKF India — critical risk (80/100) [Why: 4 days overdue, Expected delivery date has passed, Very high-value procurement]\n• PR001 (Industrial Bearings) — SKF India — critical risk (75/100) [Why: 5 days overdue, Expected delivery date has passed, High-value procurement]\n• PR002 (Steel Sheets) — Tata Steel — critical risk (75/100) [Why: 3 days overdue, Expected delivery date has passed, High-value procurement]\n• PR011 (Pressure Sensors) — Honeywell — high risk (65/100) [Why: Order is delayed, Expected delivery date has passed, High-value procurement]\n• PR004 (Electric Motors) — Siemens India — high risk (50/100) [Why: Delivery is due within 1 day, Very high-value procurement]",
-    "intent": "risk",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:10:35.062327",
-    "user": "Show critical orders.",
-    "assistant": "3 critical order(s) detected:\n• PR007 (Gear Assemblies) — SKF India — risk 80/100 [Why: 4 days overdue, Expected delivery date has passed, Very high-value procurement]\n• PR001 (Industrial Bearings) — SKF India — risk 75/100 [Why: 5 days overdue, Expected delivery date has passed, High-value procurement]\n• PR002 (Steel Sheets) — Tata Steel — risk 75/100 [Why: 3 days overdue, Expected delivery date has passed, High-value procurement]",
-    "intent": "critical",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:10:40.378191",
-    "user": "What are the most expensive orders?",
-    "assistant": "Top 5 most expensive orders:\n1. PR004 (Electric Motors) — Siemens India — ₹1,480,000.00\n2. PR009 (PLC Controllers) — Siemens India — ₹1,300,000.00\n3. PR003 (Hydraulic Pumps) — Bosch India — ₹1,250,000.00\n4. PR006 (Control Panels) — Schneider Electric — ₹1,125,000.00\n5. PR007 (Gear Assemblies) — SKF India — ₹1,080,000.00",
-    "intent": "expensive",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:10:44.858455",
-    "user": "Compare SKF India and Tata Steel.",
-    "assistant": "I can help with procurement data, suppliers, delays, risks, costs, performance, health score, and recommendations. Try asking: 'Which supplier has the most delays?'",
-    "intent": "unknown",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:10:49.852607",
-    "user": "kaunse orders risk mein hain?",
-    "assistant": "5 order(s) are currently at high or critical risk: 3 critical and 2 high risk.\n• PR007 (Gear Assemblies) — SKF India — critical risk (80/100) [Why: 4 days overdue, Expected delivery date has passed, Very high-value procurement]\n• PR001 (Industrial Bearings) — SKF India — critical risk (75/100) [Why: 5 days overdue, Expected delivery date has passed, High-value procurement]\n• PR002 (Steel Sheets) — Tata Steel — critical risk (75/100) [Why: 3 days overdue, Expected delivery date has passed, High-value procurement]\n• PR011 (Pressure Sensors) — Honeywell — high risk (65/100) [Why: Order is delayed, Expected delivery date has passed, High-value procurement]\n• PR004 (Electric Motors) — Siemens India — high risk (50/100) [Why: Delivery is due within 1 day, Very high-value procurement]",
-    "intent": "risk",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:10:53.207858",
-    "user": "सबसे ज्यादा risk वाले orders कौन से हैं?",
-    "assistant": "5 order(s) currently high या critical risk में हैं: 3 critical और 2 high risk.\n• PR007 (Gear Assemblies) — SKF India — critical risk (80/100) [Why: 4 days overdue, Expected delivery date has passed, Very high-value procurement]\n• PR001 (Industrial Bearings) — SKF India — critical risk (75/100) [Why: 5 days overdue, Expected delivery date has passed, High-value procurement]\n• PR002 (Steel Sheets) — Tata Steel — critical risk (75/100) [Why: 3 days overdue, Expected delivery date has passed, High-value procurement]\n• PR011 (Pressure Sensors) — Honeywell — high risk (65/100) [Why: Order is delayed, Expected delivery date has passed, High-value procurement]\n• PR004 (Electric Motors) — Siemens India — high risk (50/100) [Why: Delivery is due within 1 day, Very high-value procurement]",
-    "intent": "risk",
-    "language": "hindi"
-  },
-  {
     "timestamp": "2026-09-10T01:10:57.888366",
     "user": "kontya orders la risk aahe?",
     "assistant": "5 order(s) high kiwa critical risk madhe aahet: 3 critical ani 2 high risk.\n• PR007 (Gear Assemblies) — SKF India — critical risk (80/100) [Why: 4 days overdue, Expected delivery date has passed, Very high-value procurement]\n• PR001 (Industrial Bearings) — SKF India — critical risk (75/100) [Why: 5 days overdue, Expected delivery date has passed, High-value procurement]\n• PR002 (Steel Sheets) — Tata Steel — critical risk (75/100) [Why: 3 days overdue, Expected delivery date has passed, High-value procurement]\n• PR011 (Pressure Sensors) — Honeywell — high risk (65/100) [Why: Order is delayed, Expected delivery date has passed, High-value procurement]\n• PR004 (Electric Motors) — Siemens India — high risk (50/100) [Why: Delivery is due within 1 day, Very high-value procurement]",
@@ -3498,5 +3330,173 @@
     "assistant": "मैं मंडीसेतु AI हूँ, आपका समर्पित कृषि और मंडी सहायक। मैं आपके टोकन स्टेटस, भुगतान, मंडी कतार, फसल सलाह और बाजार भाव से जुड़े प्रश्नों में सहायता कर सकता हूँ। कृपया खेती या मंडी से संबंधित प्रश्न पूछें।",
     "intent": "out_of_scope",
     "language": "hindi"
+  },
+  {
+    "timestamp": "2026-09-21T17:25:30.461095",
+    "user": "Where is my token M-142?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:25:30.487557",
+    "user": "Where is my token M-142?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:25:32.376775",
+    "user": "How long is the waiting time? (Context: Token M-142)",
+    "assistant": "For token M-142 with 8 farmers ahead, the estimated wait time is approximately 45 minutes. Your recommended arrival time is 10:45 AM at Gate Entry #2.",
+    "intent": "farmer_token_wait_followup",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:25:32.403103",
+    "user": "How long is the waiting time? (Context: Token M-142)",
+    "assistant": "For token M-142 with 8 farmers ahead, the estimated wait time is approximately 45 minutes. Your recommended arrival time is 10:45 AM at Gate Entry #2.",
+    "intent": "farmer_token_wait_followup",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:25:34.023007",
+    "user": "Which procurement centre has less waiting? (Context: Token M-142)",
+    "assistant": "📍 Mandi Queue & Wait Time Analysis:\n• Shortest Queue: Centre #03 — Karnal Agri Terminal currently has the shortest queue (estimated wait time: 5–10 minutes).\n• Centre #08 — Meerut Grain Mandi is also operating smoothly (~10–15 minutes wait).\n• Centre #14 — Hapur Central Mandi currently has 8 farmers in line (~40–45 minutes wait).\n\n💡 Recommendation: To avoid waiting in line, book an arrival slot at Centre #03 — Karnal Agri Terminal.",
+    "intent": "shortest_queue",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:25:34.047297",
+    "user": "Which procurement centre has less waiting? (Context: Token M-142)",
+    "assistant": "📍 Mandi Queue & Wait Time Analysis:\n• Shortest Queue: Centre #03 — Karnal Agri Terminal currently has the shortest queue (estimated wait time: 5–10 minutes).\n• Centre #08 — Meerut Grain Mandi is also operating smoothly (~10–15 minutes wait).\n• Centre #14 — Hapur Central Mandi currently has 8 farmers in line (~40–45 minutes wait).\n\n💡 Recommendation: To avoid waiting in line, book an arrival slot at Centre #03 — Karnal Agri Terminal.",
+    "intent": "shortest_queue",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:25:36.574525",
+    "user": "Which procurement centre has less waiting? (Context: Token M-142)",
+    "assistant": "📍 Mandi Queue & Wait Time Analysis:\n• Shortest Queue: Centre #03 — Karnal Agri Terminal currently has the shortest queue (estimated wait time: 5–10 minutes).\n• Centre #08 — Meerut Grain Mandi is also operating smoothly (~10–15 minutes wait).\n• Centre #14 — Hapur Central Mandi currently has 8 farmers in line (~40–45 minutes wait).\n\n💡 Recommendation: To avoid waiting in line, book an arrival slot at Centre #03 — Karnal Agri Terminal.",
+    "intent": "shortest_queue",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:25:36.601204",
+    "user": "Which procurement centre has less waiting? (Context: Token M-142)",
+    "assistant": "📍 Mandi Queue & Wait Time Analysis:\n• Shortest Queue: Centre #03 — Karnal Agri Terminal currently has the shortest queue (estimated wait time: 5–10 minutes).\n• Centre #08 — Meerut Grain Mandi is also operating smoothly (~10–15 minutes wait).\n• Centre #14 — Hapur Central Mandi currently has 8 farmers in line (~40–45 minutes wait).\n\n💡 Recommendation: To avoid waiting in line, book an arrival slot at Centre #03 — Karnal Agri Terminal.",
+    "intent": "shortest_queue",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:25:37.756204",
+    "user": "Which procurement centre has less waiting? (Context: Token M-142)",
+    "assistant": "📍 Mandi Queue & Wait Time Analysis:\n• Shortest Queue: Centre #03 — Karnal Agri Terminal currently has the shortest queue (estimated wait time: 5–10 minutes).\n• Centre #08 — Meerut Grain Mandi is also operating smoothly (~10–15 minutes wait).\n• Centre #14 — Hapur Central Mandi currently has 8 farmers in line (~40–45 minutes wait).\n\n💡 Recommendation: To avoid waiting in line, book an arrival slot at Centre #03 — Karnal Agri Terminal.",
+    "intent": "shortest_queue",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:25:37.783762",
+    "user": "Which procurement centre has less waiting? (Context: Token M-142)",
+    "assistant": "📍 Mandi Queue & Wait Time Analysis:\n• Shortest Queue: Centre #03 — Karnal Agri Terminal currently has the shortest queue (estimated wait time: 5–10 minutes).\n• Centre #08 — Meerut Grain Mandi is also operating smoothly (~10–15 minutes wait).\n• Centre #14 — Hapur Central Mandi currently has 8 farmers in line (~40–45 minutes wait).\n\n💡 Recommendation: To avoid waiting in line, book an arrival slot at Centre #03 — Karnal Agri Terminal.",
+    "intent": "shortest_queue",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:25:38.923575",
+    "user": "Where is my token M-142?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:25:38.948627",
+    "user": "Where is my token M-142?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:25:43.563334",
+    "user": "Show me delayed procurements",
+    "assistant": "In government procurement centers (Kharid Kendra) across Uttar Pradesh, procurements can sometimes face delays due to factors such as moisture checking, gunny bag (bardana) shortages, weighing scale queues, or transport bottlenecks.\n\n### Common Reasons for Procurement Delays:\n* **High Moisture Content:** If grain moisture exceeds the prescribed limits (usually above 12%–14%), processing is paused until drying is complete.\n* **Storage & Bardana Availability:** Temporary shortages of standard gunny bags at the center.\n* **Transport Bottlenecks:** Delays in clearing previously weighed stocks from the mandi yard to godowns.\n* **Server/Portal Verification:** Verification delays on the UP Food & Civil Supplies portal (e-Uparjan).\n\n---\n\n### What You Should Do regarding Delays:\n\n1. **Check Token Status:** \n   Verify your token status (e.g., Token **M-142**) at the mandi token counter or through the MandiSetu portal.\n2. **Contact Mandi Officers:** \n   If your token has passed its estimated time or date, speak directly with the **Procurement Center In-Charge (Kendra Incharge)** or the **District Procurement Officer (DMO)** at Hapur Mandi.\n3. **Ensure Grain Quality:** \n   Make sure your crop is clean, free of dust/foreign matter, and thoroughly dried to prevent rejections or delays during quality testing.\n\n---",
+    "intent": "gemini_agriculture",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:26:20.230445",
+    "user": "Show me delayed procurements",
+    "assistant": "To check or resolve issues regarding delayed crop procurements and your token status in Hapur, Uttar Pradesh, please follow these steps:\n\n### Steps to Track and Resolve Delayed Procurements:\n\n1. **Check Online Status:**\n   * Visit the UP Food & Civil Supplies portal (**fsc.up.gov.in**) or the UP Krishi portal.\n   * Log in using your **Farmer Registration ID** or registered mobile number to check the live status of **Token M-142**.\n\n2. **Contact the Purchase Center (Kray Kendra In-Charge):**\n   * Visit your designated procurement center in Hapur with your registration slip, Token M-142 details, and Aadhaar card to inquire about the slot delay.\n\n3. **Call Official UP Farmer Helplines:**\n   * **UP Procurement Helpline:** Call toll-free at **1800-180-0150** to register a complaint regarding procurement delay.\n   * **Kisan Call Center:** Call **1800-180-1551** for general procurement guidance.\n\n4. **Escalate to Local Officials:**\n   * If procurement is delayed without a valid reason, contact your local **Mandi Secretary** or the **Block Agriculture Officer** at the Hapur District Magistrate/Agriculture Office.\n\n---",
+    "intent": "gemini_agriculture",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:30:42.703791",
+    "user": "Where is my token M-142?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:30:42.730591",
+    "user": "Where is my token M-142?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:30:44.437511",
+    "user": "How long is the waiting time? (Context: Token M-142)",
+    "assistant": "For token M-142 with 8 farmers ahead, the estimated wait time is approximately 45 minutes. Your recommended arrival time is 10:45 AM at Gate Entry #2.",
+    "intent": "farmer_token_wait_followup",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:30:44.461171",
+    "user": "How long is the waiting time? (Context: Token M-142)",
+    "assistant": "For token M-142 with 8 farmers ahead, the estimated wait time is approximately 45 minutes. Your recommended arrival time is 10:45 AM at Gate Entry #2.",
+    "intent": "farmer_token_wait_followup",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:31:21.586784",
+    "user": "Give me a procurement summary",
+    "assistant": "Here is your procurement summary based on your recent token details for the Hapur Procurement Center:\n\n### **Procurement Summary (Token M-142)**\n\n* **Token Number:** M-142  \n* **Procurement Center / Mandi:** Hapur Mandi, Uttar Pradesh  \n* **Status:** Token Issued / In Queue  \n\n---\n\n### **Important Checklist for Smooth Sale:**\n* **Moisture Content:** Ensure your produce is well-dried and cleaned. Standard acceptable moisture level for grain procurement under MSP is usually below 12%–14% (depending on the specific crop).\n* **Mandatory Documents to Carry:**\n  * Original Aadhaar Card\n  * Farmer Registration Slip (UP Agriculture / Mandi Portal)\n  * Bank passbook linked with Aadhaar (for direct MSP payment transfer)\n  * Land record / Khasra-Khatauni details\n* **Gate Pass & Unloading:** Keep your Token M-142 handy at the entry gate. Unloading will proceed once your token number is called by the procurement officials.\n\n*Note: For real-time token movement or exact weighbridge queue updates, please check with the Mandi Gate Counter or the Mandi Secretary Office in Hapur.*",
+    "intent": "gemini_agriculture",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:31:39.101775",
+    "user": "Show me delayed procurements",
+    "assistant": "To help you track your delayed procurement and the status of your **Token M-142** in Hapur, Uttar Pradesh, please follow these practical steps:\n\n### 1. Check Token Status Online\nIn Uttar Pradesh, crop procurement (such as Wheat or Paddy) is managed through the **e-Kray Pranali** portal of the Food and Civil Supplies Department. \n* Visit the official portal: **fcs.up.gov.in**\n* Go to the **\"Kisan Panjiyan\" (Farmer Registration)** or **\"Kharid\" (Procurement)** section.\n* Enter your Farmer Registration ID or registered mobile number to check the current status of Token M-142.\n\n### 2. Contact your Local Procurement Center (Kray Kendra)\nDelays in procurement or weighing often happen due to local logistics, moisture content checks, or daily limits at the center. \n* Visit the specific procurement center in Hapur where your token was generated.\n* Speak directly with the **Center In-charge (Kendra प्रभारी)** regarding the delay of Token M-142.\n\n### 3. Check DBT Payment Status\nIf your crop has already been weighed but the payment is delayed:\n* Ensure that your bank account is linked with your **Aadhaar card**, as payments are transferred directly via Aadhaar-enabled DBT (Direct Benefit Transfer).\n* You can check your payment clearance status on the UP Food portal or by visiting your local bank branch.\n\n### 4. Official Helpline Support\nIf you face unresolved delays or issues at the procurement center, you can register a complaint or seek assistance through the official Uttar Pradesh government toll-free helplines:\n* **Toll-Free Number:** 1800-1800-150 or 1967",
+    "intent": "gemini_agriculture",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:31:50.567791",
+    "user": "Show me delayed procurements",
+    "assistant": "Hello. Regarding your query about delayed procurements and your Token M-142 in Hapur, Uttar Pradesh, procurement delays at government purchase centers can happen due to various logistical or administrative reasons. \n\nHere is how you can check the status and address the delay:\n\n1. **Check Online Status:** You can track your token status, registration, and procurement progress on the official Uttar Pradesh Food and Civil Supplies Department portal (**fcs.up.gov.in**) under the 'e-Kray' (Kharid) section.\n2. **Common Reasons for Procurement Delays:**\n   * **Moisture Content:** If the moisture level in your crop is higher than the government-specified limit (usually 14% for wheat/paddy), the center may delay procurement until it is dried.\n   * **Gunny Bag (Bora) Shortage:** A temporary shortage of packing bags or transport vehicles can slow down the weighing process.\n   * **Daily Limit Caps:** Procurement centers have daily handling capacities, which can cause a backlog in token numbers.\n3. **Contact the Center In-charge:** We highly recommend contacting the Center In-charge (*Kendra प्रभारी*) at your designated Hapur procurement center. They can provide the exact queue status for Token M-142 and let you know when to bring your produce.\n4. **UP Government Helpline:** If you face unreasonable delays or irregularities at the center, you can register a complaint or seek help by calling the UP Food and Civil Supplies Department toll-free helpline: **1800-1800-150**.",
+    "intent": "gemini_agriculture",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:32:04.763562",
+    "user": "Show me delayed procurements",
+    "assistant": "Here is the status and information regarding delayed procurements at the Hapur Procurement Center / Mandi:\n\n### **Delayed Procurements Overview (Hapur Center)**\nCurrently, procurement delays generally occur due to high Mandi rush, moisture checking, or gunny bag availability. \n\n* **Active Delayed Batches:** \n  * **Token Range:** M-110 to M-135 (Pending verification / Quality check)\n  * **Average Delay:** 1 to 2 days beyond scheduled slot\n  * **Reason:** Moisture content verification and storage bay allocation.\n\n---\n\n### **Steps to Track or Resolve Procurement Delays:**\n\n1. **Check Moisture Level:** Ensure your produce meets government moisture standards (e.g., below 12-14% for grains) to avoid rejection or delay at the weighing bridge.\n2. **Contact Procurement Center In-Charge:** Speak directly with the Mandi Secretary or Block Procurement Officer at the Hapur Mandi office.\n3. **UP Food & Civil Supplies Helpline:** You can track registered procurement tokens by calling the toll-free helpline at **1800-180-0150**.\n4. **Token Refresh:** If your token (e.g., M-142) is delayed, monitor the live Mandi display board or re-verify your slot on the UP E-Procurement portal (`fcs.up.gov.in`).",
+    "intent": "gemini_agriculture",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:32:05.310825",
+    "user": "Give me a procurement summary",
+    "assistant": "Here is a summary of the government crop procurement process for Hapur, Uttar Pradesh, to help you manage your token (**Token M-142**) and prepare for a smooth sale at the purchase center (*Kray Kendra*):\n\n### **1. Token & Waiting Time Status**\n* **Token M-142:** The waiting time for your token depends on the daily handling capacity of your registered procurement center in Hapur and the volume of arrivals. \n* **Action Step:** Before loading and transporting your produce, it is highly recommended to contact your local Center In-charge (*Kendra प्रभारी*) to confirm the exact queue status for Token M-142. This will save you transport costs and avoid long waiting hours at the center.\n\n### **2. Current Minimum Support Price (MSP) for UP**\n* **Wheat (Gehun):** ₹2,275 per quintal (for the 2024-25 Rabi Marketing Season).\n* **Paddy (Dhan):** ₹2,300 per quintal for Common grade; ₹2,320 per quintal for Grade A (for the 2024-25 Kharif Marketing Season).\n\n### **3. Quality Standards (Fair Average Quality - FAQ)**\nTo ensure your crop is accepted without any delay or deduction:\n* **Moisture Content:** Ensure your grain is well-dried. The permissible moisture limit is generally up to **12% for Wheat** and **17% for Paddy**. High moisture can lead to token rejection or requests for re-drying.\n* **Cleanliness:** The produce should be free from dust, stones, chaff, damaged grains, and weed seeds.\n\n### **4. Essential Documents to Carry**\nWhen your token number is called, please carry:\n* **Registration Slip:** Copy of your online farmer registration from the UP Food portal (*fcs.up.gov.in*).\n* **Identity Proof:** Original Aadhaar Card.\n* **Mobile Phone:** The mobile number registered on the portal (for OTP verification).\n* **Land Records:** Copy of your *Khatauni* (land registry).\n* **Bank Details:** Ensure your bank account is linked with your Aadhaar (DBT enabled) for direct payment transfer.\n\n*Disclaimer: Procurement schedules and daily limits can vary by center. Please coordinate with your local Block Agriculture Extension Officer or the Center In-charge for real-time daily updates.*",
+    "intent": "gemini_agriculture",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-21T17:32:20.589844",
+    "user": "Show me delayed procurements",
+    "assistant": "To track and resolve delayed procurements or pending MSP payments in **Hapur, Uttar Pradesh**, please follow these steps:\n\n### **1. Check Status Online**\n* Visit the official UP Food & Civil Supplies Department portal (**fcs.up.gov.in** or **khadya.up.gov.in**).\n* Go to the **Kisan Registration / Procurement Status** section.\n* Enter your registered **Aadhaar Number** or **Farmer Registration ID** to check the status of your token, crop weighing, and payment dispatch.\n\n---\n\n### **2. Common Reasons for Procurement & Payment Delays**\n* **DBT & Aadhaar Seeding Issues:** Government payments are transferred directly via Direct Benefit Transfer (DBT). If your bank account is not mapped with NPCI/Aadhaar, the payment will fail or stall.\n* **Moisture & Quality Verification:** Produce with moisture content above standard limits (e.g., above 12% for wheat) may require re-drying before final procurement entry.\n* **Server Syncing at Mandi Center:** Delays can happen if the Procurement Center In-Charge (*Kendra Incharge*) has not updated the online gate pass or weight slip (*Taal Receipt*).\n\n---\n\n### **3. Action Steps to Resolve Delays in Hapur**\n* **Visit the Procurement Center:** Bring your weighing receipt (*Taal Parchi*) and farmer registration slip to the Procurement Center In-Charge at your local Hapur Mandi Samiti.\n* **Verify Bank Details:** Check with your bank branch to ensure your Aadhaar-linked account is active for NPCI payments.\n* **Contact Toll-Free Helplines:** \n  * UP Food & Civil Supplies Toll-Free Helpline: **1800-1800-150** or **1967**\n  * PM-Kisan / General Farmer Helpline: **155261** / **1800-180-1551**",
+    "intent": "gemini_agriculture",
+    "language": "english"
   }
 ]
