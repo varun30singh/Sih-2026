@@ -20,6 +20,9 @@ import { ProcurementCentresModule } from './modules/procurement-centres/procurem
 import { SlotsModule } from './modules/slots/slots.module';
 import { ProcurementsModule } from './modules/procurements/procurements.module';
 import { CropsModule } from './modules/crops/crops.module';
+import { BrokersModule } from './modules/brokers/brokers.module';
+import { BuyersModule } from './modules/buyers/buyers.module';
+import { OrdersModule } from './modules/orders/orders.module';
 
 @Module({
   imports: [
@@ -40,6 +43,9 @@ import { CropsModule } from './modules/crops/crops.module';
     AuthModule,
     AuditLogModule,
     ProcurementCentresModule,
+    BrokersModule,
+    BuyersModule,
+    OrdersModule,
     SlotsModule,
     ProcurementsModule,
     CropsModule,
