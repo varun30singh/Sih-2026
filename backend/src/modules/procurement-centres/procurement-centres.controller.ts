@@ -10,6 +10,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { Roles } from '../../common/guards/roles.decorator';
+import { RolesGuard } from '../../common/guards/roles.guard';
 import { CreateProcurementCentreDto } from './dto/create-procurement-centre.dto';
 import { UpdateProcurementCentreDto } from './dto/update-procurement-centre.dto';
 import { ProcurementCentresService } from './procurement-centres.service';
@@ -20,7 +22,8 @@ export class ProcurementCentresController {
     private readonly procurementCentresService: ProcurementCentresService,
   ) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('operator', 'admin')
   @Post()
   create(@Body() createProcurementCentreDto: CreateProcurementCentreDto) {
     return this.procurementCentresService.create(createProcurementCentreDto);
@@ -36,7 +39,8 @@ export class ProcurementCentresController {
     return this.procurementCentresService.findOne(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('operator', 'admin')
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -45,7 +49,8 @@ export class ProcurementCentresController {
     return this.procurementCentresService.update(id, updateProcurementCentreDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('operator', 'admin')
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.procurementCentresService.remove(id);

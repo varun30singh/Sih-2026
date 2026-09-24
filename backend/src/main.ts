@@ -13,19 +13,25 @@ async function bootstrap() {
   // Global API prefix
   app.setGlobalPrefix('api');
 
-  // Allow frontend to communicate with backend
+  const frontendOrigins = (process.env.FRONTEND_URL || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+  if (process.env.NODE_ENV !== 'production') {
+    frontendOrigins.push('http://localhost:3000');
+  }
+
   app.enableCors({
-    origin: true,
+    origin: frontendOrigins,
+    allowedHeaders: ['Authorization', 'Content-Type'],
     credentials: true,
   });
 
-  const port = process.env.BACKEND_PORT || process.env.PORT || 4000;
+  const port = process.env.PORT || 4000;
 
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
 
-  console.log(`MandiSetu backend running on http://localhost:${port}`);
-  console.log(`Health: http://localhost:${port}/api/health`);
-  console.log(`Chatbot: http://localhost:${port}/api/chatbot`);
+  console.log(`MandiSetu backend listening on port ${port}`);
 }
 
 bootstrap();

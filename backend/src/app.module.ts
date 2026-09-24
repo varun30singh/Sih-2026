@@ -23,6 +23,7 @@ import { CropsModule } from './modules/crops/crops.module';
 import { BrokersModule } from './modules/brokers/brokers.module';
 import { BuyersModule } from './modules/buyers/buyers.module';
 import { OrdersModule } from './modules/orders/orders.module';
+import { HealthController } from './health.controller';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { OrdersModule } from './modules/orders/orders.module';
     ProcurementsModule,
     CropsModule,
   ],
+  controllers: [HealthController],
   providers: [ConfigService],
   exports: [ConfigService],
 })
