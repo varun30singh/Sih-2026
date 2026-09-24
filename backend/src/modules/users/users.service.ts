@@ -9,6 +9,7 @@ import { PrismaService } from '../../common/prisma/prisma.service';
 import { AuditLogService } from '../audit-log/audit-log.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { createUserWithProfile, RegistrationInput } from './registration';
 
 @Injectable()
 export class UsersService {
@@ -45,6 +46,12 @@ export class UsersService {
       }
       throw error;
     }
+  }
+
+  async register(registrationInput: RegistrationInput) {
+    const user = await createUserWithProfile(this.prisma, registrationInput);
+    await this.auditLogService.log(null, 'CREATE', 'User', user.id);
+    return this.withoutPassword(user);
   }
 
   async findAll() {
