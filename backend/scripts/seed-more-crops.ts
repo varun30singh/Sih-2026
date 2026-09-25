@@ -1,34 +1,28 @@
 /**
  * seed-more-crops.ts
  *
- * Adds real MSP (Minimum Support Price) crops to the database.
+ * Adds/updates real MSP (Minimum Support Price) crops in the database.
  *
- * DATA SOURCE:
- *   - Kharif crops (2025-26 Marketing Season):
- *       Cabinet Committee on Economic Affairs (CCEA) approval, May 28 2025.
- *       Press Information Bureau, Ministry of Agriculture & Farmers Welfare.
- *       https://pib.gov.in  (search CCEA Kharif MSP 2025-26)
+ * DATA SOURCE (2026-27 season — the CURRENT season as of Sep 2026):
+ *   - Rabi 2026-27:  CCEA approval 1 Oct 2025, PIB press release.
+ *       Ministry of Agriculture & Farmers Welfare, Government of India.
+ *       https://pib.gov.in  (PRID for Rabi MSP 2026-27, Oct 2025)
  *
- *   - Rabi crops (2025-26 Marketing Season):
- *       CCEA approval, October 2024.
- *       Press Information Bureau, Ministry of Agriculture & Farmers Welfare.
- *       https://pib.gov.in  (search CCEA Rabi MSP 2025-26)
+ *   - Kharif 2026-27: CCEA approval 13 May 2026, PIB press release.
+ *       Ministry of Agriculture & Farmers Welfare, Government of India.
+ *       https://pib.gov.in  (PRID for Kharif MSP 2026-27, May 2026)
  *
- *   - Wheat (2025-26 Rabi, ₹2,425/qtl) and Rice/Paddy (Kharif 2025-26, ₹2,369/qtl)
- *     are the current season rates.  The existing seed-sample-data.ts seeded older
- *     values (Wheat ₹2,275, Rice ₹2,300 — those were 2024-25 rates).
- *     This script UPDATES them to the current 2025-26 figures if present.
+ * EXISTING DB STATE (as of Sep 2026 before this script):
+ *   id=1 Wheat  ₹2,275  ← 2024-25 rate, STALE → update to ₹2,585
+ *   id=2 Rice   ₹2,300  ← 2024-25 rate, STALE → update to ₹2,441
  *
- * HOW TO RUN (from backend/ directory):
+ * HOW TO RUN (from the backend/ project root):
  *   npx ts-node --project tsconfig.json scripts/seed-more-crops.ts
  *
- * The script is idempotent:
- *   - Skips any crop already present by exact name.
- *   - Updates Wheat and Rice MSP rates to the 2025-26 season values.
- *   - Prints a summary table at the end.
- *
- * DO NOT run this script without reviewing the MSP figures below
- * against the official PIB / CACP announcements first.
+ * IDEMPOTENCY:
+ *   - Wheat and Rice: always UPDATE to the current season rate.
+ *   - All other crops: insert if not exists by exact name, skip if already present.
+ *   - Safe to re-run at any time.
  */
 
 import 'dotenv/config';
@@ -40,94 +34,83 @@ interface CropInput {
   name: string;
   msp_rate: number; // ₹ per quintal
   unit: string;
-  season: string;   // informational — not stored in DB, just for the summary
+  season: string;   // informational — not stored in DB, for the summary log only
 }
 
-// ─── KHARIF 2025-26 (announced May 28, 2025 by CCEA) ───────────────────────
-// Source: PIB press release on CCEA Kharif MSP 2025-26
-const kharifCrops: CropInput[] = [
-  // Cereals / Nutri-cereals
-  { name: 'Paddy (Common)',  msp_rate: 2369, unit: 'quintal', season: 'Kharif 2025-26' },
-  { name: 'Paddy (Grade A)', msp_rate: 2389, unit: 'quintal', season: 'Kharif 2025-26' },
-  { name: 'Bajra',           msp_rate: 2775, unit: 'quintal', season: 'Kharif 2025-26' },
-  { name: 'Maize',           msp_rate: 2400, unit: 'quintal', season: 'Kharif 2025-26' },
-  { name: 'Jowar (Hybrid)',  msp_rate: 3699, unit: 'quintal', season: 'Kharif 2025-26' },
-  { name: 'Jowar (Maldandi)',msp_rate: 3749, unit: 'quintal', season: 'Kharif 2025-26' },
-  { name: 'Ragi',            msp_rate: 4600, unit: 'quintal', season: 'Kharif 2025-26' },
-
-  // Pulses
-  { name: 'Tur (Arhar)',     msp_rate: 8000, unit: 'quintal', season: 'Kharif 2025-26' },
-  { name: 'Moong',           msp_rate: 8768, unit: 'quintal', season: 'Kharif 2025-26' },
-  { name: 'Urad',            msp_rate: 7800, unit: 'quintal', season: 'Kharif 2025-26' },
-
-  // Oilseeds
-  { name: 'Groundnut',         msp_rate: 7263, unit: 'quintal', season: 'Kharif 2025-26' },
-  { name: 'Soybean (Yellow)',  msp_rate: 5328, unit: 'quintal', season: 'Kharif 2025-26' },
-  { name: 'Sunflower Seed',    msp_rate: 7580, unit: 'quintal', season: 'Kharif 2025-26' },
-  { name: 'Sesamum',           msp_rate: 9267, unit: 'quintal', season: 'Kharif 2025-26' },
-
-  // Fibre
-  { name: 'Cotton (Medium Staple)', msp_rate: 7710, unit: 'quintal', season: 'Kharif 2025-26' },
-  { name: 'Cotton (Long Staple)',   msp_rate: 8110, unit: 'quintal', season: 'Kharif 2025-26' },
-];
-
-// ─── RABI 2025-26 (announced October 2024 by CCEA) ──────────────────────────
-// Source: PIB press release on CCEA Rabi MSP 2025-26
+// ─── RABI 2026-27 (CCEA approval: 1 October 2025) ───────────────────────────
+// Source: PIB press release, Ministry of Agriculture & Farmers Welfare
 const rabiCrops: CropInput[] = [
-  { name: 'Wheat',                msp_rate: 2425, unit: 'quintal', season: 'Rabi 2025-26' },
-  { name: 'Barley',               msp_rate: 1980, unit: 'quintal', season: 'Rabi 2025-26' },
-  { name: 'Gram (Chana)',         msp_rate: 5650, unit: 'quintal', season: 'Rabi 2025-26' },
-  { name: 'Lentil (Masur)',       msp_rate: 6700, unit: 'quintal', season: 'Rabi 2025-26' },
-  { name: 'Rapeseed & Mustard',   msp_rate: 5950, unit: 'quintal', season: 'Rabi 2025-26' },
-  { name: 'Safflower',            msp_rate: 5940, unit: 'quintal', season: 'Rabi 2025-26' },
+  // NOTE: Wheat is handled separately in the UPDATE step below.
+  { name: 'Barley',             msp_rate: 2150, unit: 'quintal', season: 'Rabi 2026-27' },
+  { name: 'Gram (Chana)',       msp_rate: 5875, unit: 'quintal', season: 'Rabi 2026-27' },
+  { name: 'Lentil (Masur)',     msp_rate: 7000, unit: 'quintal', season: 'Rabi 2026-27' },
+  { name: 'Rapeseed & Mustard', msp_rate: 6200, unit: 'quintal', season: 'Rabi 2026-27' },
+  { name: 'Safflower',          msp_rate: 6540, unit: 'quintal', season: 'Rabi 2026-27' },
 ];
 
-// ─── SKIPPED (insufficient reliable data for the specific 2025-26 season): ─
-//   Nigerseed — verify from official PIB before adding.
-//   Jute       — MSP set per quintal but verify the 2025-26 figure.
+// ─── KHARIF 2026-27 (CCEA approval: 13 May 2026) ────────────────────────────
+// Source: PIB press release, Ministry of Agriculture & Farmers Welfare
+const kharifCrops: CropInput[] = [
+  // NOTE: Rice/Paddy Common is handled separately in the UPDATE step below.
+  { name: 'Paddy (Grade A)',         msp_rate: 2461, unit: 'quintal', season: 'Kharif 2026-27' },
+  { name: 'Bajra',                   msp_rate: 2900, unit: 'quintal', season: 'Kharif 2026-27' },
+  { name: 'Maize',                   msp_rate: 2410, unit: 'quintal', season: 'Kharif 2026-27' },
+  { name: 'Jowar (Hybrid)',          msp_rate: 4023, unit: 'quintal', season: 'Kharif 2026-27' },
+  { name: 'Jowar (Maldandi)',        msp_rate: 4073, unit: 'quintal', season: 'Kharif 2026-27' },
+  { name: 'Ragi',                    msp_rate: 5205, unit: 'quintal', season: 'Kharif 2026-27' },
+  // Pulses
+  { name: 'Tur (Arhar)',             msp_rate: 8450, unit: 'quintal', season: 'Kharif 2026-27' },
+  { name: 'Moong',                   msp_rate: 8780, unit: 'quintal', season: 'Kharif 2026-27' },
+  { name: 'Urad',                    msp_rate: 8200, unit: 'quintal', season: 'Kharif 2026-27' },
+  // Oilseeds
+  { name: 'Groundnut',               msp_rate: 7517, unit: 'quintal', season: 'Kharif 2026-27' },
+  { name: 'Soybean (Yellow)',        msp_rate: 5708, unit: 'quintal', season: 'Kharif 2026-27' },
+  // ── 2026-27 figures for the crops below are NOT yet fully verified from PIB ──
+  // Keeping their 2025-26 CCEA-approved values until confirmed:
+  { name: 'Sunflower Seed',          msp_rate: 7580, unit: 'quintal', season: 'Kharif 2025-26 (2026-27 pending)' },
+  { name: 'Sesamum',                 msp_rate: 9267, unit: 'quintal', season: 'Kharif 2025-26 (2026-27 pending)' },
+  { name: 'Cotton (Medium Staple)',  msp_rate: 7710, unit: 'quintal', season: 'Kharif 2025-26 (2026-27 pending)' },
+  { name: 'Cotton (Long Staple)',    msp_rate: 8110, unit: 'quintal', season: 'Kharif 2025-26 (2026-27 pending)' },
+];
 
-const allNewCrops = [...kharifCrops, ...rabiCrops];
+// All "insert-if-not-exists" crops
+const allNewCrops: CropInput[] = [...rabiCrops, ...kharifCrops];
 
-// Names already seeded by seed-sample-data.ts that need MSP updates
-const UPDATE_MSP: Record<string, number> = {
-  'Wheat': 2425,   // was ₹2,275 (2024-25) → updated to ₹2,425 (2025-26)
-  'Rice':  2369,   // was ₹2,300 (2024-25) → updated to ₹2,369 (Paddy Common 2025-26)
+// ─── ALWAYS-UPDATE: Existing seeded records with stale 2024-25 rates ──────────
+// Both "Wheat" and "Rice" rows already exist (id=1, id=2) with old rates.
+// We always overwrite their msp_rate to the current season's figure.
+const ALWAYS_UPDATE: Record<string, { msp_rate: number; season: string }> = {
+  'Wheat': { msp_rate: 2585, season: 'Rabi 2026-27'   },  // was ₹2,275 (2024-25)
+  'Rice':  { msp_rate: 2441, season: 'Kharif 2026-27' },  // was ₹2,300 (2024-25)
 };
 
 async function main() {
-  const summary: Array<{ type: string; name: string; msp: number; season: string; status: string }> = [];
+  type Row = { type: string; name: string; msp: number; season: string; status: string };
+  const summary: Row[] = [];
 
-  // 1. Update existing Wheat and Rice to 2025-26 rates
-  for (const [name, newRate] of Object.entries(UPDATE_MSP)) {
-    const existing = await prisma.crops.findFirst({ where: { name } });
+  // ── Step 1: Force-update Wheat and Rice to current season rates ─────────────
+  for (const [cropName, { msp_rate, season }] of Object.entries(ALWAYS_UPDATE)) {
+    const existing = await prisma.crops.findFirst({ where: { name: cropName } });
     if (existing) {
-      if (existing.msp_rate !== newRate) {
-        await prisma.crops.update({ where: { id: existing.id }, data: { msp_rate: newRate } });
-        summary.push({ type: 'crop', name, msp: newRate, season: '(updated to 2025-26)', status: 'updated' });
-      } else {
-        summary.push({ type: 'crop', name, msp: newRate, season: '(already current)', status: 'up-to-date' });
-      }
+      await prisma.crops.update({ where: { id: existing.id }, data: { msp_rate } });
+      const prev = existing.msp_rate;
+      summary.push({
+        type: 'crop', name: cropName, msp: msp_rate, season,
+        status: prev !== msp_rate ? `updated (was ₹${prev})` : 'already current',
+      });
     } else {
-      summary.push({ type: 'crop', name, msp: newRate, season: '(not found)', status: 'not-found — will be inserted below if listed' });
+      // Not in DB at all — insert it
+      await prisma.crops.create({ data: { name: cropName, msp_rate, unit: 'quintal' } });
+      summary.push({ type: 'crop', name: cropName, msp: msp_rate, season, status: 'inserted (was missing)' });
     }
   }
 
-  // 2. Insert new crops (skip by exact name — case-sensitive)
+  // ── Step 2: Insert new crops (skip by exact name if already present) ─────────
   for (const crop of allNewCrops) {
-    // Don't double-insert Wheat/Rice — they're handled above (or by the original seed)
-    if (crop.name === 'Wheat' || crop.name === 'Rice') {
-      summary.push({ type: 'crop', name: crop.name, msp: crop.msp_rate, season: crop.season, status: 'handled-by-update-step' });
-      continue;
-    }
-
     const existing = await prisma.crops.findFirst({ where: { name: crop.name } });
     if (!existing) {
       await prisma.crops.create({
-        data: {
-          name: crop.name,
-          msp_rate: crop.msp_rate,
-          unit: crop.unit,
-        },
+        data: { name: crop.name, msp_rate: crop.msp_rate, unit: crop.unit },
       });
       summary.push({ type: 'crop', name: crop.name, msp: crop.msp_rate, season: crop.season, status: 'inserted' });
     } else {
@@ -137,9 +120,10 @@ async function main() {
 
   console.log('\n=== Crop Seed Summary ===');
   console.table(summary);
-  console.log('\nData source: CCEA / PIB (Ministry of Agriculture & Farmers Welfare)');
-  console.log('Kharif season: 2025-26 (announced May 28, 2025)');
-  console.log('Rabi season:   2025-26 (announced October 2024)');
+  console.log('\nData source : CCEA / PIB, Ministry of Agriculture & Farmers Welfare, Govt. of India');
+  console.log('Rabi  2026-27: approved 1 Oct 2025');
+  console.log('Kharif 2026-27: approved 13 May 2026');
+  console.log('Sunflower Seed / Sesamum / Cotton: retaining 2025-26 values — verify 2026-27 from PIB before updating.');
 }
 
 main()

@@ -1,74 +1,103 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../../common/prisma/prisma.service';
 
 @Injectable()
 export class CropsService {
-  private crops = [
-    {
-      id: 1,
-      name: 'Wheat',
-      mspRate: 2275,
-      unit: 'quintal',
-    },
-    {
-      id: 2,
-      name: 'Rice',
-      mspRate: 2300,
-      unit: 'quintal',
-    },
-  ];
+  constructor(private readonly prisma: PrismaService) {}
 
-  findAll() {
-    return this.crops;
+  async findAll() {
+    const list = await this.prisma.crops.findMany({
+      orderBy: { id: 'asc' },
+    });
+    return list.map((crop) => ({
+      id: crop.id,
+      name: crop.name,
+      mspRate: Number(crop.msp_rate),
+      msp_rate: Number(crop.msp_rate),
+      unit: crop.unit,
+    }));
   }
 
-  findOne(id: number) {
-    return this.crops.find((crop) => crop.id === id) || null;
-  }
-
-  create(data: {
-    name: string;
-    mspRate: number;
-    unit: string;
-  }) {
-    const crop = {
-      id: this.crops.length + 1,
-      name: data.name,
-      mspRate: data.mspRate,
-      unit: data.unit,
+  async findOne(id: number) {
+    const crop = await this.prisma.crops.findUnique({
+      where: { id },
+    });
+    if (!crop) return null;
+    return {
+      id: crop.id,
+      name: crop.name,
+      mspRate: Number(crop.msp_rate),
+      msp_rate: Number(crop.msp_rate),
+      unit: crop.unit,
     };
-
-    this.crops.push(crop);
-    return crop;
   }
 
-  update(
+  async create(data: {
+    name: string;
+    mspRate?: number;
+    msp_rate?: number;
+    unit?: string;
+  }) {
+    const rate = data.mspRate ?? data.msp_rate ?? 0;
+    const crop = await this.prisma.crops.create({
+      data: {
+        name: data.name,
+        msp_rate: rate,
+        unit: data.unit || 'quintal',
+      },
+    });
+    return {
+      id: crop.id,
+      name: crop.name,
+      mspRate: Number(crop.msp_rate),
+      msp_rate: Number(crop.msp_rate),
+      unit: crop.unit,
+    };
+  }
+
+  async update(
     id: number,
     data: {
       name?: string;
       mspRate?: number;
+      msp_rate?: number;
       unit?: string;
     },
   ) {
-    const crop = this.findOne(id);
+    const existing = await this.prisma.crops.findUnique({ where: { id } });
+    if (!existing) return null;
 
-    if (!crop) {
-      return null;
-    }
-
-    if (data.name !== undefined) crop.name = data.name;
-    if (data.mspRate !== undefined) crop.mspRate = data.mspRate;
-    if (data.unit !== undefined) crop.unit = data.unit;
-
-    return crop;
+    const rate = data.mspRate ?? data.msp_rate;
+    const crop = await this.prisma.crops.update({
+      where: { id },
+      data: {
+        ...(data.name !== undefined && { name: data.name }),
+        ...(rate !== undefined && { msp_rate: rate }),
+        ...(data.unit !== undefined && { unit: data.unit }),
+      },
+    });
+    return {
+      id: crop.id,
+      name: crop.name,
+      mspRate: Number(crop.msp_rate),
+      msp_rate: Number(crop.msp_rate),
+      unit: crop.unit,
+    };
   }
 
-  remove(id: number) {
-    const index = this.crops.findIndex((crop) => crop.id === id);
+  async remove(id: number) {
+    const existing = await this.prisma.crops.findUnique({ where: { id } });
+    if (!existing) return null;
 
-    if (index === -1) {
-      return null;
-    }
-
-    return this.crops.splice(index, 1)[0];
+    const crop = await this.prisma.crops.delete({
+      where: { id },
+    });
+    return {
+      id: crop.id,
+      name: crop.name,
+      mspRate: Number(crop.msp_rate),
+      msp_rate: Number(crop.msp_rate),
+      unit: crop.unit,
+    };
   }
 }
