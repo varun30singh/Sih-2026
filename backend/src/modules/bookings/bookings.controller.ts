@@ -13,7 +13,7 @@ export class BookingsController {
     @Body() createBookingDto: CreateBookingDto,
     @Req() request: { user: { userId: number } },
   ) {
-    return this.bookingsService.create(createBookingDto, request.user.userId);
+    return this.bookingsService.create(createBookingDto);
   }
 
   @Get('farmer/:farmerId')
