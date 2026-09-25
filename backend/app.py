@@ -122,7 +122,7 @@ def static_proxy(path):
     return jsonify({
         "error": "Not Found",
         "path": f"/{path}",
-        "message": "Resource not found on ProcureAI service."
+        "message": "Resource not found on Krish AI service."
     }), 404
 
 
@@ -409,9 +409,14 @@ def chat():
         # Send message to Procurement AI
         if process_message_with_suggestions:
             try:
-                response, suggested_questions, resolved_language = process_message_with_suggestions(
-                    message, language=language
+                result = process_message_with_suggestions(
+                    message,
+                    language=language,
+                    farmer_id=data.get("farmer_id", "farmer-001"),
+                    session_id=data.get("session_id"),
                 )
+
+                response, suggested_questions, resolved_language, _source_metadata = result
             except Exception as exc:
                 if process_message:
                     response = process_message(message, language=language)
@@ -426,7 +431,7 @@ def chat():
         else:
             return jsonify({
                 "success": False,
-                "error": "ProcureAI assistant engine is currently unavailable."
+                "error": "Krish AI assistant engine is currently unavailable."
             }), 503
 
         # Return AI response with suggested questions

@@ -17,7 +17,7 @@ export const ChatbotPanel: React.FC = () => {
   return (
     <div
       role="dialog"
-      aria-label="ProcureAI Assistant"
+      aria-label="Krish AI"
       aria-modal="false"
       className="fixed z-50 flex flex-col pointer-events-auto transition-all duration-300
         /* Desktop */

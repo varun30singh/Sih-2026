@@ -47,11 +47,11 @@ const ChatbotContext = createContext<ChatbotContextType | undefined>(
 );
 const WELCOME_MESSAGES: Record<ChatLanguage, string> = {
   english:
-    "Hello! I’m **ProcureAI**, your MandiSetu procurement assistant. How can I help you today?",
+    "Hello! I’m **Krish AI**, your MandiSetu procurement assistant. How can I help you today?",
   hindi:
-    "नमस्कार! मैं **ProcureAI** हूँ, आपका मंडीसेतु प्रोक्योरमेंट सहायक। आज मैं आपकी क्या सहायता कर सकता हूँ?",
+    "नमस्कार! मैं **Krish AI** हूँ, आपका मंडीसेतु प्रोक्योरमेंट सहायक। आज मैं आपकी क्या सहायता कर सकता हूँ?",
   marathi:
-    "नमस्कार! मी **ProcureAI** आहे, तुमचा मंडीसेतु खरेदी सहाय्यक. आज मी तुम्हाला कशी मदत करू शकतो?",
+    "नमस्कार! मी **Krish AI** आहे, तुमचा मंडीसेतु खरेदी सहाय्यक. आज मी तुम्हाला कशी मदत करू शकतो?",
 };
 export const ChatbotProvider: React.FC<{
   children: React.ReactNode;
@@ -302,7 +302,7 @@ export const ChatbotProvider: React.FC<{
         id: `msg-err-${Date.now()}`,
         sender: 'assistant',
         text:
-          'I’m unable to process your request at this moment. Please check if the ProcureAI server is running.',
+          'I’m unable to process your request at this moment. Please check if the Krish AI server is running.',
         timestamp: new Date().toLocaleTimeString([], {
           hour: '2-digit',
           minute: '2-digit',

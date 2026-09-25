@@ -62,7 +62,7 @@ export const ChatInput: React.FC = () => {
 
       {/* Footer Subtext with Context Pill */}
       <div className="flex items-center justify-between mt-2 px-1 text-[10px] text-slate-400">
-        <span>ProcureAI may make mistakes. Verify critical data.</span>
+        <span>Krish AI may make mistakes. Verify critical data.</span>
         {activeToken && (
           <span className="inline-flex items-center gap-1 font-mono text-emerald-600 dark:text-emerald-400 font-bold">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />

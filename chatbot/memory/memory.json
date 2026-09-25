@@ -1,13 +1,13 @@
 {
-  "last_intent": "gemini_agriculture",
+  "last_intent": "out_of_scope",
   "last_language": "english",
   "last_supplier": null,
   "last_item": null,
   "last_procurement_id": null,
   "last_question": "किस supplier को सबसे ज्यादा delay है?",
   "last_procurement_question": "Which orders are delayed?",
-  "last_user_message": "Show me delayed procurements",
-  "last_updated": "2026-09-21T17:32:20.587970",
+  "last_user_message": "Can I get an alert when my turn is near?",
+  "last_updated": "2026-09-25T11:36:19.190790",
   "last_data": {
     "delayed_orders": [
       {
@@ -186,7 +186,7 @@
       "better_overall": "Tata Steel"
     }
   },
-  "last_topic": "agriculture",
+  "last_topic": "out_of_scope",
   "last_token_id": "M-142",
   "last_sale_crop": "Cotton",
   "last_sale_mandi": "Centre #14 — Hapur Central Mandi"

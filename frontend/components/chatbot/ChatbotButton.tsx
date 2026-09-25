@@ -54,7 +54,7 @@ export const ChatbotButton: React.FC = () => {
       <button
         type="button"
         onClick={toggleChat}
-        aria-label="Open ProcureAI assistant"
+        aria-label="Open Krish AI assistant"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-emerald-600 via-emerald-500 to-teal-600 text-white shadow-[0_8px_25px_rgba(16,185,129,0.38)] hover:shadow-[0_12px_32px_rgba(16,185,129,0.52)] hover:scale-105 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-emerald-400/40"
@@ -69,7 +69,7 @@ export const ChatbotButton: React.FC = () => {
           className={`absolute top-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-white dark:border-slate-900 ${
             isOnline ? 'bg-emerald-400' : 'bg-rose-500'
           }`}
-          title={isOnline ? 'ProcureAI Online' : 'ProcureAI Offline'}
+          title={isOnline ? 'Krish AI Online' : 'Krish AI Offline'}
         />
 
         {/* Floating Button Icon */}

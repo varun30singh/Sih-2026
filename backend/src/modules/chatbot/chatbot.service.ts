@@ -32,7 +32,7 @@ export class ChatbotService {
             status: 'degraded',
             pythonBridge: 'unreachable',
             message:
-              'Python ProcureAI service offline or restarting',
+              'Python Krish AI service offline or restarting',
           }),
         );
       });

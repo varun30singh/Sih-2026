@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { createSuccessResponse } from '../../common';
-
+import { PrismaService } from '../../common/prisma/prisma.service';
 export interface FarmerProfile {
   id: string;
   name: string;
@@ -12,56 +12,43 @@ export interface FarmerProfile {
   preferredLanguage: string;
   isVerified: boolean;
 }
-
 @Injectable()
 export class FarmersService {
-  private farmers: FarmerProfile[] = [
-    {
-      id: 'farmer-001',
-      name: 'Ramesh Singh',
-      mobile: '+919876543210',
-      state: 'Uttar Pradesh',
-      district: 'Meerut',
-      village: 'Dorli',
-      totalLandAcres: 4.5,
-      preferredLanguage: 'hindi',
-      isVerified: true,
-    },
-    {
-      id: 'farmer-002',
-      name: 'Sukhwinder Dhillon',
-      mobile: '+919812345678',
-      state: 'Haryana',
-      district: 'Karnal',
-      village: 'Taraori',
-      totalLandAcres: 8.0,
-      preferredLanguage: 'punjabi',
-      isVerified: true,
-    }
-  ];
-
-  findAll() {
-    return createSuccessResponse(this.farmers);
+  constructor(private readonly prisma: PrismaService) {}
+  async findAll() {
+    const farmers = await this.prisma.farmers.findMany({
+      orderBy: { id: 'asc' },
+    });
+    return createSuccessResponse(farmers);
   }
-
-  findById(id: string) {
-    const farmer = this.farmers.find(f => f.id === id);
+  async findById(id: string) {
+    const farmerId = Number(id);
+    if (!Number.isInteger(farmerId)) {
+      return createSuccessResponse(null);
+    }
+    const farmer = await this.prisma.farmers.findUnique({
+      where: { id: farmerId },
+    });
     return createSuccessResponse(farmer || null);
   }
-
-  register(farmerData: Partial<FarmerProfile>) {
-    const newFarmer: FarmerProfile = {
-      id: `farmer-${Date.now().toString().slice(-4)}`,
-      name: farmerData.name || 'New Farmer',
-      mobile: farmerData.mobile || '+919999999999',
-      state: farmerData.state || 'Uttar Pradesh',
-      district: farmerData.district || 'Meerut',
-      village: farmerData.village || '',
-      totalLandAcres: farmerData.totalLandAcres || 2.0,
-      preferredLanguage: farmerData.preferredLanguage || 'hindi',
-      isVerified: false,
-    };
-    this.farmers.push(newFarmer);
-    return createSuccessResponse(newFarmer, 'Farmer registered successfully');
+  async findByUserId(userId: number) {
+    const farmer = await this.prisma.farmers.findFirst({
+      where: { user_id: userId },
+    });
+    if (!farmer) {
+      throw new NotFoundException('Farmer profile not found');
+    }
+    return createSuccessResponse(farmer);
+  }
+  async register(farmerData: Partial<FarmerProfile> & { user_id?: number }) {
+    const farmer = await this.prisma.farmers.create({
+      data: {
+        user_id: farmerData.user_id,
+        name: farmerData.name || 'New Farmer',
+        phone: farmerData.mobile || '+919999999999',
+        village: farmerData.village || '',
+      },
+    });
+    return createSuccessResponse(farmer, 'Farmer registered successfully');
   }
 }

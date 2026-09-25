@@ -215,7 +215,7 @@ HISTORY_FILE = os.path.join(BASE_DIR, "chat_history", "chat_history.json")
 if not os.path.exists(os.path.dirname(HISTORY_FILE)):
     HISTORY_FILE = os.path.join(BASE_DIR, "chat_history.json")
 
-BOT_NAME = "ProcureAI"
+BOT_NAME = "Krish AI"
 
 MAX_MEMORY_ITEMS = 100
 MAX_HISTORY_ITEMS = 500
@@ -1773,15 +1773,15 @@ def save_history(history: List[Dict[str, Any]]) -> None:
 LOCAL_RESPONSES = {
     "greeting": {
         "english": (
-            "Hello! I'm ProcureAI. I can analyze procurement data, "
+            "Hello! I'm Krish AI. I can analyze procurement data, "
             "supplier performance, delays, risks, costs, and recommendations."
         ),
         "hindi": (
-            "नमस्ते! मैं ProcureAI हूँ। मैं procurement data, suppliers, "
+            "नमस्ते! मैं Krish AI हूँ। मैं procurement data, suppliers, "
             "delays, risks, costs और recommendations का analysis कर सकता हूँ।"
         ),
         "marathi": (
-            "नमस्कार! मी ProcureAI आहे. मी procurement data, suppliers, "
+            "नमस्कार! मी Krish AI आहे. मी procurement data, suppliers, "
             "delays, risks, costs आणि recommendations चे analysis करू शकतो."
         ),
     },
@@ -4428,21 +4428,21 @@ class ProcureAIAssistant:
                         f"{sup_name} का परफॉरमेंस स्कोर {score}/100 ({rating.title()}) है, जिसका मुख्य कारण डिलीवरी में देरी है:\n"
                         f"• विलंबित ऑर्डर: कुल {orders} में से {delayed} ऑर्डर में देरी है ({delay_rate:.1f}% देरी दर)\n"
                         f"• कुल विलंब के दिन: {delay_days} दिन (प्रति विलंबित ऑर्डर औसत {avg_delay:.1f} दिन)\n"
-                        f"ProcureAI के मूल्यांकन फॉर्मूले में, उच्च देरी दर पर अधिकतम 70 अंकों तक की पेनल्टी लगती है। कम डिलीवरी विश्वसनीयता के कारण सप्लायर का स्कोर कम हुआ है।"
+                        f"Krish AI के मूल्यांकन फॉर्मूले में, उच्च देरी दर पर अधिकतम 70 अंकों तक की पेनल्टी लगती है। कम डिलीवरी विश्वसनीयता के कारण सप्लायर का स्कोर कम हुआ है।"
                     )
                 elif language == "marathi":
                     return (
                         f"{sup_name} चा परफॉर्मन्स स्कोअर {score}/100 ({rating.title()}) आहे, याचे मुख्य कारण डिलिव्हरीतील विलंब आहे:\n"
                         f"• विलंबित ऑर्डर्स: एकूण {orders} पैकी {delayed} ऑर्डर्स उशिरा आहेत ({delay_rate:.1f}% विलंब दर)\n"
                         f"• एकूण विलंबाचे दिवस: {delay_days} दिवस (सरासरी {avg_delay:.1f} दिवस)\n"
-                        f"ProcureAI मोजमापानुसार उच्च विलंब दरावर मोठी पेनल्टी लागते, ज्यामुळे हा स्कोअर कमी झाला आहे."
+                        f"Krish AI मोजमापानुसार उच्च विलंब दरावर मोठी पेनल्टी लागते, ज्यामुळे हा स्कोअर कमी झाला आहे."
                     )
                 else:
                     return (
                         f"{sup_name}'s performance score is {score}/100 ({rating.title()}) primarily due to delivery delays:\n"
                         f"• Delayed Orders: {delayed} out of {orders} total order(s) are delayed ({delay_rate:.1f}% delay rate)\n"
                         f"• Delay Impact: {delay_days} total delay days (averaging {avg_delay:.1f} days per delayed order)\n"
-                        f"Under ProcureAI's scoring engine, delay rates impose heavy penalties (up to 70 points deduction), which significantly reduced this supplier's reliability standing."
+                        f"Under Krish AI's scoring engine, delay rates impose heavy penalties (up to 70 points deduction), which significantly reduced this supplier's reliability standing."
                     )
 
         # ----------------------------------------------------
@@ -4607,7 +4607,7 @@ class ProcureAIAssistant:
 
             if language == "hindi":
                 return (
-                    "वास्तविक डिलीवरी रिकॉर्ड और ProcureAI मूल्यांकन के आधार पर सिफारिशें:\n\n"
+                    "वास्तविक डिलीवरी रिकॉर्ड और Krish AI मूल्यांकन के आधार पर सिफारिशें:\n\n"
                     "• शीर्ष अनुशंसित सप्लायर्स (Top Recommended):\n  "
                     + "\n  ".join(f"{i+1}. {t}" for i, t in enumerate(top_strs_hi))
                     + "\n\n• उच्च जोखिम वाले सप्लायर्स (निगरानी आवश्यक):\n  "
@@ -4616,7 +4616,7 @@ class ProcureAIAssistant:
                 )
             elif language == "marathi":
                 return (
-                    "डिलिव्हरी रेकॉर्ड आणि ProcureAI परफॉर्मन्स मोजमापावर आधारित शिफारशी:\n\n"
+                    "डिलिव्हरी रेकॉर्ड आणि Krish AI परफॉर्मन्स मोजमापावर आधारित शिफारशी:\n\n"
                     "• सर्वोत्तम शिफारस केलेले सप्लायर्स (Top Recommended):\n  "
                     + "\n  ".join(f"{i+1}. {t}" for i, t in enumerate(top_strs_mr))
                     + "\n\n• जास्त जोखीम असलेले सप्लायर्स (काळजी आवश्यक):\n  "
@@ -4625,7 +4625,7 @@ class ProcureAIAssistant:
                 )
             else:
                 return (
-                    "Based on actual delivery performance and ProcureAI evaluation metrics:\n\n"
+                    "Based on actual delivery performance and Krish AI evaluation metrics:\n\n"
                     "• Top Recommended Suppliers:\n  "
                     + "\n  ".join(f"{i+1}. {t}" for i, t in enumerate(top_strs_en))
                     + "\n\n• High-Risk Suppliers (Requires Monitoring):\n  "
@@ -4635,7 +4635,7 @@ class ProcureAIAssistant:
 
         if language == "hindi":
             return (
-                "वास्तविक डिलीवरी रिकॉर्ड और ProcureAI मूल्यांकन के आधार पर सिफारिशें:\n\n"
+                "वास्तविक डिलीवरी रिकॉर्ड और Krish AI मूल्यांकन के आधार पर सिफारिशें:\n\n"
                 "• शीर्ष अनुशंसित सप्लायर्स (Top Recommended):\n"
                 "  1. Polycab और Hindalco: 100% ऑन-टाइम डिलीवरी और शून्य विलंब (Zero Delays)।\n"
                 "  2. Siemens India और Bosch India: शून्य देरी के साथ विश्वसनीय औद्योगिक आपूर्ति रिकॉर्ड।\n\n"
@@ -4646,7 +4646,7 @@ class ProcureAIAssistant:
             )
         elif language == "marathi":
             return (
-                "डिलिव्हरी रेकॉर्ड आणि ProcureAI परफॉर्मन्स मोजमापावर आधारित शिफारशी:\n\n"
+                "डिलिव्हरी रेकॉर्ड आणि Krish AI परफॉर्मन्स मोजमापावर आधारित शिफारशी:\n\n"
                 "• सर्वोत्तम शिफारस केलेले सप्लायर्स (Top Recommended):\n"
                 "  1. Polycab आणि Hindalco: 100% वेळेवर डिलिव्हरी आणि शून्य विलंब (Zero Delays).\n"
                 "  2. Siemens India आणि Bosch India: शून्य विलंबासह विश्वसनीय औद्योगिक पुरवठा.\n\n"
@@ -4657,7 +4657,7 @@ class ProcureAIAssistant:
             )
         else:
             return (
-                "Based on actual delivery performance and ProcureAI evaluation metrics:\n\n"
+                "Based on actual delivery performance and Krish AI evaluation metrics:\n\n"
                 "• Top Recommended Suppliers:\n"
                 "  1. Polycab and Hindalco: 100% on-time delivery rate with zero recorded delays.\n"
                 "  2. Siemens India and Bosch India: Proven reliability with zero delivery delays across active purchase orders.\n\n"
@@ -5498,8 +5498,9 @@ class ProcureAIAssistant:
         # Remove punctuation for easier matching
         clean_message = re.sub(r"[^\w\s\u0900-\u097F]", " ", user_message)
         clean_message = re.sub(r"\s+", " ", clean_message).strip()
+
         def contains_any(words):
-        return any(word in clean_message for word in words)
+            return any(word in clean_message for word in words)
 
         suggested_questions: List[str] = []
 
@@ -5508,303 +5509,303 @@ class ProcureAIAssistant:
         # --------------------------------------------------------
         if resolved_lang == "english":
 
-        # Token / queue questions
-        if contains_any([
-        "token",
-        "queue",
-        "position",
-        "ahead",
-        "waiting",
-        "wait time",
-        ]):
-        suggested_questions = [
-        "How many farmers are ahead of me?",
-        "When should I reach the procurement centre?",
-        "Which procurement centre has less waiting?",
-        "Can I get an alert when my turn is near?",
-        ]
+            # Token / queue questions
+            if contains_any([
+                "token",
+                "queue",
+                "position",
+                "ahead",
+                "waiting",
+                "wait time",
+            ]):
+                suggested_questions = [
+                    "How many farmers are ahead of me?",
+                    "When should I reach the procurement centre?",
+                    "Which procurement centre has less waiting?",
+                    "Can I get an alert when my turn is near?",
+                ]
 
-        # Delays
-        elif contains_any([
-        "delay",
-        "delayed",
-        "late",
-        "delays",
-        ]):
-        suggested_questions = [
-        "Which procurement centres have the most delays?",
-        "What is the average waiting time today?",
-        "Which centre currently has the shortest queue?",
-        "Can I get an alert when my turn is near?",
-        ]
+            # Delays
+            elif contains_any([
+                "delay",
+                "delayed",
+                "late",
+                "delays",
+            ]):
+                suggested_questions = [
+                    "Which procurement centres have the most delays?",
+                    "What is the average waiting time today?",
+                    "Which centre currently has the shortest queue?",
+                    "Can I get an alert when my turn is near?",
+                ]
 
-        # Procurement centre
-        elif contains_any([
-        "centre",
-        "center",
-        "mandi",
-        "procurement centre",
-        "procurement center",
-        ]):
-        suggested_questions = [
-        "Which procurement centre has the shortest waiting time?",
-        "Which centre is nearest to me?",
-        "Which centres have available slots?",
-        "What is the current queue at my centre?",
-        ]
+            # Procurement centre
+            elif contains_any([
+                "centre",
+                "center",
+                "mandi",
+                "procurement centre",
+                "procurement center",
+            ]):
+                suggested_questions = [
+                    "Which procurement centre has the shortest waiting time?",
+                    "Which centre is nearest to me?",
+                    "Which centres have available slots?",
+                    "What is the current queue at my centre?",
+                ]
 
-        # Slot booking
-        elif contains_any([
-        "slot",
-        "booking",
-        "book",
-        "appointment",
-        ]):
-        suggested_questions = [
-        "Which slots are available today?",
-        "Can I book a slot for tomorrow?",
-        "Which centre has the earliest available slot?",
-        "Can I change my booked slot?",
-        ]
+            # Slot booking
+            elif contains_any([
+                "slot",
+                "booking",
+                "book",
+                "appointment",
+            ]):
+                suggested_questions = [
+                    "Which slots are available today?",
+                    "Can I book a slot for tomorrow?",
+                    "Which centre has the earliest available slot?",
+                    "Can I change my booked slot?",
+                ]
 
-        # Payment
-        elif contains_any([
-        "payment",
-        "paid",
-        "money",
-        "payment status",
-        ]):
-        suggested_questions = [
-        "What is my payment status?",
-        "When will my payment arrive?",
-        "What is the expected payment amount?",
-        "Can I check my previous payment history?",
-        ]
+            # Payment
+            elif contains_any([
+                "payment",
+                "paid",
+                "money",
+                "payment status",
+            ]):
+                suggested_questions = [
+                    "What is my payment status?",
+                    "When will my payment arrive?",
+                    "What is the expected payment amount?",
+                    "Can I check my previous payment history?",
+                ]
 
-        # Crop / price
-        elif contains_any([
-        "price",
-        "rate",
-        "wheat",
-        "crop",
-        "soybean",
-        "mustard",
-        "गेहूं",
-        ]):
-        suggested_questions = [
-        "What is today's wheat price?",
-        "What is today's soybean price?",
-        "Which crop has the best market price today?",
-        "How can I check the latest mandi prices?",
-        ]
+            # Crop / price
+            elif contains_any([
+                "price",
+                "rate",
+                "wheat",
+                "crop",
+                "soybean",
+                "mustard",
+                "गेहूं",
+            ]):
+                suggested_questions = [
+                    "What is today's wheat price?",
+                    "What is today's soybean price?",
+                    "Which crop has the best market price today?",
+                    "How can I check the latest mandi prices?",
+                ]
 
-        # Default farmer suggestions
-        else:
-        suggested_questions = [
-        "What is my current token status?",
-        "Which procurement centre has less waiting?",
-        "How long is the current waiting time?",
-        "What are today's available slots?",
-        ]
+            # Default farmer suggestions
+            else:
+                suggested_questions = [
+                    "What is my current token status?",
+                    "Which procurement centre has less waiting?",
+                    "How long is the current waiting time?",
+                    "What are today's available slots?",
+                ]
 
         # --------------------------------------------------------
         # HINDI
         # --------------------------------------------------------
         elif resolved_lang == "hindi":
 
-        if contains_any([
-        "टोकन",
-        "कतार",
-        "क्यू",
-        "बारी",
-        "इंतजार",
-        "प्रतीक्षा",
-        ]):
-        suggested_questions = [
-        "मेरे आगे कितने किसान हैं?",
-        "मुझे केंद्र पर कब पहुंचना चाहिए?",
-        "किस खरीद केंद्र पर कम इंतजार है?",
-        "मेरी बारी आने पर मुझे अलर्ट कैसे मिलेगा?",
-        ]
+            if contains_any([
+                "टोकन",
+                "कतार",
+                "क्यू",
+                "बारी",
+                "इंतजार",
+                "प्रतीक्षा",
+            ]):
+                suggested_questions = [
+                    "मेरे आगे कितने किसान हैं?",
+                    "मुझे केंद्र पर कब पहुंचना चाहिए?",
+                    "किस खरीद केंद्र पर कम इंतजार है?",
+                    "मेरी बारी आने पर मुझे अलर्ट कैसे मिलेगा?",
+                ]
 
-        elif contains_any([
-        "देरी",
-        "देर",
-        "विलंब",
-        ]):
-        suggested_questions = [
-        "किस खरीद केंद्र पर सबसे ज्यादा देरी है?",
-        "आज का औसत इंतजार कितना है?",
-        "किस केंद्र में सबसे छोटी कतार है?",
-        "मेरी बारी आने पर अलर्ट कैसे मिलेगा?",
-        ]
+            elif contains_any([
+                "देरी",
+                "देर",
+                "विलंब",
+            ]):
+                suggested_questions = [
+                    "किस खरीद केंद्र पर सबसे ज्यादा देरी है?",
+                    "आज का औसत इंतजार कितना है?",
+                    "किस केंद्र में सबसे छोटी कतार है?",
+                    "मेरी बारी आने पर अलर्ट कैसे मिलेगा?",
+                ]
 
-        elif contains_any([
-        "केंद्र",
-        "मंडी",
-        "खरीद केंद्र",
-        ]):
-        suggested_questions = [
-        "किस खरीद केंद्र पर सबसे कम इंतजार है?",
-        "मेरे सबसे नजदीक कौन सा केंद्र है?",
-        "किस केंद्र पर स्लॉट उपलब्ध हैं?",
-        "मेरे केंद्र की वर्तमान कतार क्या है?",
-        ]
+            elif contains_any([
+                "केंद्र",
+                "मंडी",
+                "खरीद केंद्र",
+            ]):
+                suggested_questions = [
+                    "किस खरीद केंद्र पर सबसे कम इंतजार है?",
+                    "मेरे सबसे नजदीक कौन सा केंद्र है?",
+                    "किस केंद्र पर स्लॉट उपलब्ध हैं?",
+                    "मेरे केंद्र की वर्तमान कतार क्या है?",
+                ]
 
-        elif contains_any([
-        "स्लॉट",
-        "बुक",
-        "बुकिंग",
-        "समय",
-        ]):
-        suggested_questions = [
-        "आज कौन से स्लॉट उपलब्ध हैं?",
-        "क्या मैं कल का स्लॉट बुक कर सकता हूं?",
-        "सबसे जल्दी स्लॉट किस केंद्र पर है?",
-        "क्या मैं अपना स्लॉट बदल सकता हूं?",
-        ]
+            elif contains_any([
+                "स्लॉट",
+                "बुक",
+                "बुकिंग",
+                "समय",
+            ]):
+                suggested_questions = [
+                    "आज कौन से स्लॉट उपलब्ध हैं?",
+                    "क्या मैं कल का स्लॉट बुक कर सकता हूं?",
+                    "सबसे जल्दी स्लॉट किस केंद्र पर है?",
+                    "क्या मैं अपना स्लॉट बदल सकता हूं?",
+                ]
 
-        elif contains_any([
-        "पेमेंट",
-        "भुगतान",
-        "पैसे",
-        "भुगतान स्थिति",
-        ]):
-        suggested_questions = [
-        "मेरे भुगतान की स्थिति क्या है?",
-        "मेरा भुगतान कब आएगा?",
-        "मुझे कितने भुगतान की उम्मीद है?",
-        "मैं अपना पिछला भुगतान इतिहास कैसे देखूं?",
-        ]
+            elif contains_any([
+                "पेमेंट",
+                "भुगतान",
+                "पैसे",
+                "भुगतान स्थिति",
+            ]):
+                suggested_questions = [
+                    "मेरे भुगतान की स्थिति क्या है?",
+                    "मेरा भुगतान कब आएगा?",
+                    "मुझे कितने भुगतान की उम्मीद है?",
+                    "मैं अपना पिछला भुगतान इतिहास कैसे देखूं?",
+                ]
 
-        elif contains_any([
-        "भाव",
-        "कीमत",
-        "गेहूं",
-        "फसल",
-        "सोयाबीन",
-        "सरसों",
-        ]):
-        suggested_questions = [
-        "आज गेहूं का भाव क्या है?",
-        "आज सोयाबीन का भाव क्या है?",
-        "आज किस फसल का भाव सबसे अच्छा है?",
-        "आज के मंडी भाव कैसे देखें?",
-        ]
+            elif contains_any([
+                "भाव",
+                "कीमत",
+                "गेहूं",
+                "फसल",
+                "सोयाबीन",
+                "सरसों",
+            ]):
+                suggested_questions = [
+                    "आज गेहूं का भाव क्या है?",
+                    "आज सोयाबीन का भाव क्या है?",
+                    "आज किस फसल का भाव सबसे अच्छा है?",
+                    "आज के मंडी भाव कैसे देखें?",
+                ]
 
-        else:
-        suggested_questions = [
-        "मेरे टोकन की स्थिति क्या है?",
-        "किस खरीद केंद्र पर कम इंतजार है?",
-        "अभी कितना इंतजार करना पड़ेगा?",
-        "आज कौन से स्लॉट उपलब्ध हैं?",
-        ]
+            else:
+                suggested_questions = [
+                    "मेरे टोकन की स्थिति क्या है?",
+                    "किस खरीद केंद्र पर कम इंतजार है?",
+                    "अभी कितना इंतजार करना पड़ेगा?",
+                    "आज कौन से स्लॉट उपलब्ध हैं?",
+                ]
 
         # --------------------------------------------------------
         # MARATHI
         # --------------------------------------------------------
         else:
 
-        if contains_any([
-        "टोकन",
-        "रांग",
-        "queue",
-        "वाट",
-        "प्रतीक्षा",
-        ]):
-        suggested_questions = [
-        "माझ्या पुढे किती शेतकरी आहेत?",
-        "मला केंद्रावर कधी पोहोचावे?",
-        "कोणत्या खरेदी केंद्रावर कमी प्रतीक्षा आहे?",
-        "माझी पाळी जवळ आल्यावर अलर्ट मिळेल का?",
-        ]
+            if contains_any([
+                "टोकन",
+                "रांग",
+                "queue",
+                "वाट",
+                "प्रतीक्षा",
+            ]):
+                suggested_questions = [
+                    "माझ्या पुढे किती शेतकरी आहेत?",
+                    "मला केंद्रावर कधी पोहोचावे?",
+                    "कोणत्या खरेदी केंद्रावर कमी प्रतीक्षा आहे?",
+                    "माझी पाळी जवळ आल्यावर अलर्ट मिळेल का?",
+                ]
 
-        elif contains_any([
-        "विलंब",
-        "उशीर",
-        "देरी",
-        ]):
-        suggested_questions = [
-        "कोणत्या खरेदी केंद्रावर सर्वाधिक विलंब आहे?",
-        "आजची सरासरी प्रतीक्षा किती आहे?",
-        "कोणत्या केंद्रावर सर्वात कमी रांग आहे?",
-        "माझी पाळी जवळ आल्यावर अलर्ट मिळेल का?",
-        ]
+            elif contains_any([
+                "विलंब",
+                "उशीर",
+                "देरी",
+            ]):
+                suggested_questions = [
+                    "कोणत्या खरेदी केंद्रावर सर्वाधिक विलंब आहे?",
+                    "आजची सरासरी प्रतीक्षा किती आहे?",
+                    "कोणत्या केंद्रावर सर्वात कमी रांग आहे?",
+                    "माझी पाळी जवळ आल्यावर अलर्ट मिळेल का?",
+                ]
 
-        elif contains_any([
-        "केंद्र",
-        "मंडी",
-        "खरेदी केंद्र",
-        ]):
-        suggested_questions = [
-        "कोणत्या खरेदी केंद्रावर कमी प्रतीक्षा आहे?",
-        "माझ्या जवळचे खरेदी केंद्र कोणते?",
-        "कोणत्या केंद्रावर स्लॉट उपलब्ध आहेत?",
-        "माझ्या केंद्राची सध्याची रांग किती आहे?",
-        ]
+            elif contains_any([
+                "केंद्र",
+                "मंडी",
+                "खरेदी केंद्र",
+            ]):
+                suggested_questions = [
+                    "कोणत्या खरेदी केंद्रावर कमी प्रतीक्षा आहे?",
+                    "माझ्या जवळचे खरेदी केंद्र कोणते?",
+                    "कोणत्या केंद्रावर स्लॉट उपलब्ध आहेत?",
+                    "माझ्या केंद्राची सध्याची रांग किती आहे?",
+                ]
 
-        elif contains_any([
-        "स्लॉट",
-        "बुक",
-        "बुकिंग",
-        "वेळ",
-        ]):
-        suggested_questions = [
-        "आज कोणते स्लॉट उपलब्ध आहेत?",
-        "मी उद्याचा स्लॉट बुक करू शकतो का?",
-        "सर्वात लवकर स्लॉट कोणत्या केंद्रावर आहे?",
-        "मी माझा स्लॉट बदलू शकतो का?",
-        ]
+            elif contains_any([
+                "स्लॉट",
+                "बुक",
+                "बुकिंग",
+                "वेळ",
+            ]):
+                suggested_questions = [
+                    "आज कोणते स्लॉट उपलब्ध आहेत?",
+                    "मी उद्याचा स्लॉट बुक करू शकतो का?",
+                    "सर्वात लवकर स्लॉट कोणत्या केंद्रावर आहे?",
+                    "मी माझा स्लॉट बदलू शकतो का?",
+                ]
 
-        elif contains_any([
-        "पेमेंट",
-        "पैसे",
-        "भुगतान",
-        "पेमेंट स्थिती",
-        ]):
-        suggested_questions = [
-        "माझ्या पेमेंटची स्थिती काय आहे?",
-        "माझे पेमेंट कधी येईल?",
-        "मला किती पेमेंट मिळण्याची अपेक्षा आहे?",
-        "माझा मागील पेमेंट इतिहास कसा पाहू?",
-        ]
+            elif contains_any([
+                "पेमेंट",
+                "पैसे",
+                "भुगतान",
+                "पेमेंट स्थिती",
+            ]):
+                suggested_questions = [
+                    "माझ्या पेमेंटची स्थिती काय आहे?",
+                    "माझे पेमेंट कधी येईल?",
+                    "मला किती पेमेंट मिळण्याची अपेक्षा आहे?",
+                    "माझा मागील पेमेंट इतिहास कसा पाहू?",
+                ]
 
-        elif contains_any([
-        "भाव",
-        "किंमत",
-        "गहू",
-        "सोयाबीन",
-        "मोहरी",
-        "पीक",
-        ]):
-        suggested_questions = [
-        "आजचा गव्हाचा भाव किती आहे?",
-        "आजचा सोयाबीनचा भाव किती आहे?",
-        "आज कोणत्या पिकाचा बाजारभाव चांगला आहे?",
-        "आजचे मंडी भाव कसे पाहू?",
-        ]
+            elif contains_any([
+                "भाव",
+                "किंमत",
+                "गहू",
+                "सोयाबीन",
+                "मोहरी",
+                "पीक",
+            ]):
+                suggested_questions = [
+                    "आजचा गव्हाचा भाव किती आहे?",
+                    "आजचा सोयाबीनचा भाव किती आहे?",
+                    "आज कोणत्या पिकाचा बाजारभाव चांगला आहे?",
+                    "आजचे मंडी भाव कसे पाहू?",
+                ]
 
-        else:
-        suggested_questions = [
-        "माझ्या टोकनची स्थिती काय आहे?",
-        "कमी प्रतीक्षा असलेले खरेदी केंद्र कोणते?",
-        "सध्या किती वेळ प्रतीक्षा करावी लागेल?",
-        "आज कोणते स्लॉट उपलब्ध आहेत?",
-        ]
+            else:
+                suggested_questions = [
+                    "माझ्या टोकनची स्थिती काय आहे?",
+                    "कमी प्रतीक्षा असलेले खरेदी केंद्र कोणते?",
+                    "सध्या किती वेळ प्रतीक्षा करावी लागेल?",
+                    "आज कोणते स्लॉट उपलब्ध आहेत?",
+                ]
 
         # --------------------------------------------------------
         # REMOVE THE QUESTION THAT WAS JUST ASKED
         # --------------------------------------------------------
 
         normalized_current = re.sub(
-        r"\s+",
-        " ",
-        normalize_text(message).lower()
+            r"\s+",
+            " ",
+            normalize_text(message).lower()
         ).strip()
 
         suggested_questions = [
-        q for q in suggested_questions
-        if re.sub(r"\s+", " ", q.lower()).strip() != normalized_current
+            q for q in suggested_questions
+            if re.sub(r"\s+", " ", q.lower()).strip() != normalized_current
         ]
 
         # Always keep exactly 4 fresh suggestions where possible
@@ -5814,10 +5815,10 @@ class ProcureAIAssistant:
         self.last_suggested_questions = suggested_questions
 
         return (
-        response,
-        suggested_questions,
-        resolved_lang,
-        self.last_source_metadata,
+            response,
+            suggested_questions,
+            resolved_lang,
+            self.last_source_metadata,
         )
 
 # ============================================================
@@ -5921,7 +5922,7 @@ def main() -> None:
             user_message = input("You: ").strip()
 
         except (KeyboardInterrupt, EOFError):
-            print("\nProcureAI: Goodbye!")
+            print("\nKrish AI: Goodbye!")
             break
 
         if not user_message:
@@ -5932,12 +5933,12 @@ def main() -> None:
             "quit",
             "bye",
         }:
-            print("ProcureAI: Goodbye!")
+            print("Krish AI: Goodbye!")
             break
 
         response = assistant.ask(user_message)
 
-        print(f"ProcureAI: {response}")
+        print(f"Krish AI: {response}")
         print()
 
 

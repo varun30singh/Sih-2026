@@ -1,131 +1,5 @@
 [
   {
-    "timestamp": "2026-09-10T01:10:57.888366",
-    "user": "kontya orders la risk aahe?",
-    "assistant": "5 order(s) high kiwa critical risk madhe aahet: 3 critical ani 2 high risk.\n• PR007 (Gear Assemblies) — SKF India — critical risk (80/100) [Why: 4 days overdue, Expected delivery date has passed, Very high-value procurement]\n• PR001 (Industrial Bearings) — SKF India — critical risk (75/100) [Why: 5 days overdue, Expected delivery date has passed, High-value procurement]\n• PR002 (Steel Sheets) — Tata Steel — critical risk (75/100) [Why: 3 days overdue, Expected delivery date has passed, High-value procurement]\n• PR011 (Pressure Sensors) — Honeywell — high risk (65/100) [Why: Order is delayed, Expected delivery date has passed, High-value procurement]\n• PR004 (Electric Motors) — Siemens India — high risk (50/100) [Why: Delivery is due within 1 day, Very high-value procurement]",
-    "intent": "risk",
-    "language": "marathi_english"
-  },
-  {
-    "timestamp": "2026-09-10T01:23:30.493476",
-    "user": "Compare SKF India and Tata Steel",
-    "assistant": "I can help with procurement data, suppliers, delays, risks, costs, performance, health score, and recommendations. Try asking: 'Which supplier has the most delays?'",
-    "intent": "unknown",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:30:34.737773",
-    "user": "Which supplier has the most delays?",
-    "assistant": "SKF India has the highest number of delays with 2 delayed order(s).",
-    "intent": "supplier_delays",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:30:34.739617",
-    "user": "kis supplier ko sabse zyada delay hai?",
-    "assistant": "SKF India ko sabse zyada delays hain — 2 delayed order(s).",
-    "intent": "supplier_delays",
-    "language": "hinglish"
-  },
-  {
-    "timestamp": "2026-09-10T01:30:34.741157",
-    "user": "किस supplier को सबसे ज्यादा delay है?",
-    "assistant": "SKF India में सबसे ज्यादा delays हैं — 2 delayed order(s)।",
-    "intent": "supplier_delays",
-    "language": "hindi"
-  },
-  {
-    "timestamp": "2026-09-10T01:30:34.743075",
-    "user": "kaunse orders risk mein hain?",
-    "assistant": "5 order(s) high ya critical risk mein hain: 3 critical aur 2 high risk.\n• PR007 (Gear Assemblies) — SKF India — critical risk (80/100) [Why: 4 days overdue, Expected delivery date has passed, Very high-value procurement]\n• PR001 (Industrial Bearings) — SKF India — critical risk (75/100) [Why: 5 days overdue, Expected delivery date has passed, High-value procurement]\n• PR002 (Steel Sheets) — Tata Steel — critical risk (75/100) [Why: 3 days overdue, Expected delivery date has passed, High-value procurement]\n• PR011 (Pressure Sensors) — Honeywell — high risk (65/100) [Why: Order is delayed, Expected delivery date has passed, High-value procurement]\n• PR004 (Electric Motors) — Siemens India — high risk (50/100) [Why: Delivery is due within 1 day, Very high-value procurement]",
-    "intent": "risk",
-    "language": "hinglish"
-  },
-  {
-    "timestamp": "2026-09-10T01:30:34.744921",
-    "user": "सबसे ज्यादा risk वाले orders कौन से हैं?",
-    "assistant": "5 order(s) currently high या critical risk में हैं: 3 critical और 2 high risk.\n• PR007 (Gear Assemblies) — SKF India — critical risk (80/100) [Why: 4 days overdue, Expected delivery date has passed, Very high-value procurement]\n• PR001 (Industrial Bearings) — SKF India — critical risk (75/100) [Why: 5 days overdue, Expected delivery date has passed, High-value procurement]\n• PR002 (Steel Sheets) — Tata Steel — critical risk (75/100) [Why: 3 days overdue, Expected delivery date has passed, High-value procurement]\n• PR011 (Pressure Sensors) — Honeywell — high risk (65/100) [Why: Order is delayed, Expected delivery date has passed, High-value procurement]\n• PR004 (Electric Motors) — Siemens India — high risk (50/100) [Why: Delivery is due within 1 day, Very high-value procurement]",
-    "intent": "risk",
-    "language": "hindi"
-  },
-  {
-    "timestamp": "2026-09-10T01:30:34.747231",
-    "user": "kontya orders la risk aahe?",
-    "assistant": "5 order(s) high kiwa critical risk madhe aahet: 3 critical ani 2 high risk.\n• PR007 (Gear Assemblies) — SKF India — critical risk (80/100) [Why: 4 days overdue, Expected delivery date has passed, Very high-value procurement]\n• PR001 (Industrial Bearings) — SKF India — critical risk (75/100) [Why: 5 days overdue, Expected delivery date has passed, High-value procurement]\n• PR002 (Steel Sheets) — Tata Steel — critical risk (75/100) [Why: 3 days overdue, Expected delivery date has passed, High-value procurement]\n• PR011 (Pressure Sensors) — Honeywell — high risk (65/100) [Why: Order is delayed, Expected delivery date has passed, High-value procurement]\n• PR004 (Electric Motors) — Siemens India — high risk (50/100) [Why: Delivery is due within 1 day, Very high-value procurement]",
-    "intent": "risk",
-    "language": "marathi_english"
-  },
-  {
-    "timestamp": "2026-09-10T01:30:34.749112",
-    "user": "Show critical orders.",
-    "assistant": "3 critical order(s) detected:\n• PR007 (Gear Assemblies) — SKF India — risk 80/100 [Why: 4 days overdue, Expected delivery date has passed, Very high-value procurement]\n• PR001 (Industrial Bearings) — SKF India — risk 75/100 [Why: 5 days overdue, Expected delivery date has passed, High-value procurement]\n• PR002 (Steel Sheets) — Tata Steel — risk 75/100 [Why: 3 days overdue, Expected delivery date has passed, High-value procurement]",
-    "intent": "critical",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:30:34.750825",
-    "user": "What are the most expensive orders?",
-    "assistant": "Top 5 most expensive orders:\n1. PR004 (Electric Motors) — Siemens India — ₹1,480,000.00\n2. PR009 (PLC Controllers) — Siemens India — ₹1,300,000.00\n3. PR003 (Hydraulic Pumps) — Bosch India — ₹1,250,000.00\n4. PR006 (Control Panels) — Schneider Electric — ₹1,125,000.00\n5. PR007 (Gear Assemblies) — SKF India — ₹1,080,000.00",
-    "intent": "expensive",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:30:34.752347",
-    "user": "What is the procurement health score?",
-    "assistant": "Procurement Health Score: 46/100 (High Risk)\n• Total Orders: 12\n• Delayed Orders: 4 (33.3%)\n• Critical Orders: 3\n• High Risk Orders: 2",
-    "intent": "health",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:30:34.753972",
-    "user": "Give me recommendations.",
-    "assistant": "Procurement recommendations:\n• [CRITICAL] SKF India has multiple critical orders requiring immediate attention.\n  Affected orders:\n  • PR007\n  • PR001\n  Action: Contact SKF India immediately, confirm delivery status, and evaluate an alternative procurement plan.\n• [CRITICAL] Tata Steel has a critical order requiring immediate attention.\n  Affected orders:\n  • PR002\n  Action: Contact Tata Steel, confirm delivery status, and evaluate an alternative procurement plan.\n• [HIGH] Significant financial exposure detected.\n  Affected orders:\n  • PR007\n  • PR001\n  Action: Prioritize these orders because delays could have a significant financial impact.\n• [HIGH] Supplier performance review required.\n  Affected suppliers:\n  • SKF India\n  • Tata Steel\n  Action: Review supplier SLA and delivery history and consider backup suppliers.\n• [MEDIUM] Delivery confirmation required for upcoming order(s) due within 3 days.\n  Affected orders:\n  • PR004\n  • PR003\n  • PR009\n  Action: Confirm delivery schedules with affected suppliers and monitor these orders closely.",
-    "intent": "recommendations",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:30:38.288409",
-    "user": "Compare SKF India and Tata Steel",
-    "assistant": "I can help with procurement data, suppliers, delays, risks, costs, performance, health score, and recommendations. Try asking: 'Which supplier has the most delays?'",
-    "intent": "unknown",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:34:56.448216",
-    "user": "Compare SKF India and Tata Steel",
-    "assistant": "Supplier Comparison\nSKF India\n• Orders: 2\n• Delayed orders: 2 (100.0% delay rate)\n• Performance score: 20/100 (poor)\n• Procurement value: ₹1,705,000.00\nTata Steel\n• Orders: 1\n• Delayed orders: 1 (100.0% delay rate)\n• Performance score: 20/100 (poor)\n• Procurement value: ₹850,000.00\nOverall:\n• Delays: Tata Steel has fewer delayed orders (1 vs 2).\n• Cost: Tata Steel has lower procurement spend (₹850,000.00 vs ₹1,705,000.00).\n• Overall: Tata Steel is performing better with fewer delays and lower financial exposure.",
-    "intent": "supplier_comparison",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:35:20.198514",
-    "user": "Compare SKF India and Tata Steel.",
-    "assistant": "Supplier Comparison\nSKF India\n• Orders: 2\n• Delayed orders: 2 (100.0% delay rate)\n• Performance score: 20/100 (poor)\n• Procurement value: ₹1,705,000.00\nTata Steel\n• Orders: 1\n• Delayed orders: 1 (100.0% delay rate)\n• Performance score: 20/100 (poor)\n• Procurement value: ₹850,000.00\nOverall:\n• Delays: Tata Steel has fewer delayed orders (1 vs 2).\n• Cost: Tata Steel has lower procurement spend (₹850,000.00 vs ₹1,705,000.00).\n• Overall: Tata Steel is performing better with fewer delays and lower financial exposure.",
-    "intent": "supplier_comparison",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:35:20.201018",
-    "user": "SKF India vs Tata Steel",
-    "assistant": "Supplier Comparison\nSKF India\n• Orders: 2\n• Delayed orders: 2 (100.0% delay rate)\n• Performance score: 20/100 (poor)\n• Procurement value: ₹1,705,000.00\nTata Steel\n• Orders: 1\n• Delayed orders: 1 (100.0% delay rate)\n• Performance score: 20/100 (poor)\n• Procurement value: ₹850,000.00\nOverall:\n• Delays: Tata Steel has fewer delayed orders (1 vs 2).\n• Cost: Tata Steel has lower procurement spend (₹850,000.00 vs ₹1,705,000.00).\n• Overall: Tata Steel is performing better with fewer delays and lower financial exposure.",
-    "intent": "supplier_comparison",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:35:20.203494",
-    "user": "SKF India versus Tata Steel",
-    "assistant": "Supplier Comparison\nSKF India\n• Orders: 2\n• Delayed orders: 2 (100.0% delay rate)\n• Performance score: 20/100 (poor)\n• Procurement value: ₹1,705,000.00\nTata Steel\n• Orders: 1\n• Delayed orders: 1 (100.0% delay rate)\n• Performance score: 20/100 (poor)\n• Procurement value: ₹850,000.00\nOverall:\n• Delays: Tata Steel has fewer delayed orders (1 vs 2).\n• Cost: Tata Steel has lower procurement spend (₹850,000.00 vs ₹1,705,000.00).\n• Overall: Tata Steel is performing better with fewer delays and lower financial exposure.",
-    "intent": "supplier_comparison",
-    "language": "english"
-  },
-  {
-    "timestamp": "2026-09-10T01:35:20.205879",
-    "user": "How does SKF India compare with Tata Steel?",
-    "assistant": "Supplier Comparison\nSKF India\n• Orders: 2\n• Delayed orders: 2 (100.0% delay rate)\n• Performance score: 20/100 (poor)\n• Procurement value: ₹1,705,000.00\nTata Steel\n• Orders: 1\n• Delayed orders: 1 (100.0% delay rate)\n• Performance score: 20/100 (poor)\n• Procurement value: ₹850,000.00\nOverall:\n• Delays: Tata Steel has fewer delayed orders (1 vs 2).\n• Cost: Tata Steel has lower procurement spend (₹850,000.00 vs ₹1,705,000.00).\n• Overall: Tata Steel is performing better with fewer delays and lower financial exposure.",
-    "intent": "supplier_comparison",
-    "language": "english"
-  },
-  {
     "timestamp": "2026-09-10T01:35:20.206987",
     "user": "Compare the performance of SKF India and Tata Steel",
     "assistant": "Based on the comparison, Tata Steel is performing better overall with fewer delays and lower financial exposure.",
@@ -3497,6 +3371,132 @@
     "user": "Show me delayed procurements",
     "assistant": "To track and resolve delayed procurements or pending MSP payments in **Hapur, Uttar Pradesh**, please follow these steps:\n\n### **1. Check Status Online**\n* Visit the official UP Food & Civil Supplies Department portal (**fcs.up.gov.in** or **khadya.up.gov.in**).\n* Go to the **Kisan Registration / Procurement Status** section.\n* Enter your registered **Aadhaar Number** or **Farmer Registration ID** to check the status of your token, crop weighing, and payment dispatch.\n\n---\n\n### **2. Common Reasons for Procurement & Payment Delays**\n* **DBT & Aadhaar Seeding Issues:** Government payments are transferred directly via Direct Benefit Transfer (DBT). If your bank account is not mapped with NPCI/Aadhaar, the payment will fail or stall.\n* **Moisture & Quality Verification:** Produce with moisture content above standard limits (e.g., above 12% for wheat) may require re-drying before final procurement entry.\n* **Server Syncing at Mandi Center:** Delays can happen if the Procurement Center In-Charge (*Kendra Incharge*) has not updated the online gate pass or weight slip (*Taal Receipt*).\n\n---\n\n### **3. Action Steps to Resolve Delays in Hapur**\n* **Visit the Procurement Center:** Bring your weighing receipt (*Taal Parchi*) and farmer registration slip to the Procurement Center In-Charge at your local Hapur Mandi Samiti.\n* **Verify Bank Details:** Check with your bank branch to ensure your Aadhaar-linked account is active for NPCI payments.\n* **Contact Toll-Free Helplines:** \n  * UP Food & Civil Supplies Toll-Free Helpline: **1800-1800-150** or **1967**\n  * PM-Kisan / General Farmer Helpline: **155261** / **1800-180-1551**",
     "intent": "gemini_agriculture",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:24:57.815384",
+    "user": "What is my token status?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:24:57.820436",
+    "user": "What is my token status?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:25:59.001494",
+    "user": "What is my token status?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:25:59.006181",
+    "user": "What is my token status?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:26:25.652360",
+    "user": "What is my token status?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:27:39.874114",
+    "user": "What is my token status?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:27:45.409906",
+    "user": "What is my token status?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:33:02.467286",
+    "user": "Hello",
+    "assistant": "Hello! I'm ProcureAI. I can analyze procurement data, supplier performance, delays, risks, costs, and recommendations.",
+    "intent": "greeting",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:33:08.977625",
+    "user": "नमस्ते",
+    "assistant": "मैं procurement data, suppliers, delays, risks, costs और performance में मदद कर सकता हूँ। उदाहरण: 'किस supplier को सबसे ज्यादा delay है?'",
+    "intent": "unknown",
+    "language": "hindi"
+  },
+  {
+    "timestamp": "2026-09-25T01:35:27.996033",
+    "user": "What are today slots?",
+    "assistant": "I can help with procurement data, suppliers, delays, risks, costs, performance, health score, and recommendations. Try asking: 'Which supplier has the most delays?'",
+    "intent": "unknown",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:42:19.907275",
+    "user": "What is my current token status?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:42:22.642278",
+    "user": "How long is the current waiting time?",
+    "assistant": "For token M-142 with 8 farmers ahead, the estimated wait time is approximately 45 minutes. Your recommended arrival time is 10:45 AM at Gate Entry #2.",
+    "intent": "farmer_token_wait_followup",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:42:24.067294",
+    "user": "Which procurement centre has less waiting?",
+    "assistant": "📍 Mandi Queue & Wait Time Analysis:\n• Shortest Queue: Centre #03 — Karnal Agri Terminal currently has the shortest queue (estimated wait time: 5–10 minutes).\n• Centre #08 — Meerut Grain Mandi is also operating smoothly (~10–15 minutes wait).\n• Centre #14 — Hapur Central Mandi currently has 8 farmers in line (~40–45 minutes wait).\n\n💡 Recommendation: To avoid waiting in line, book an arrival slot at Centre #03 — Karnal Agri Terminal.",
+    "intent": "shortest_queue",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:42:27.546434",
+    "user": "Hi",
+    "assistant": "Hello! I'm ProcureAI. I can analyze procurement data, supplier performance, delays, risks, costs, and recommendations.",
+    "intent": "greeting",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T01:42:34.016410",
+    "user": "मेरे टोकन की स्थिति क्या है?",
+    "assistant": "🌾 डिजिटल टोकन विवरण: M-142 (🟢 समय पर - ON TRACK)\n• किसान: Ramesh Singh (UP-FARM-2026-8921)\n• खरीद केंद्र: Centre #14 — Hapur Central Mandi\n• फसल: Wheat (Kalyan Sona / FAQ Grade) — 25.0 क्विंटल (2,500 किग्रा)\n• सरकारी एमएसपी दर: ₹2,275.00/क्विंटल (कुल अनुमानित राशि: ₹56,875.00)\n• कतार की स्थिति: 8 किसान आगे हैं (वर्तमान सेवा: टोकन M-134)\n• अनुमानित प्रतीक्षा समय: 45 मिनट\n• अनुशंसित आगमन समय: 10:45 AM (गेट एंट्री #2)\n• जीरो-वेटिंग प्रोटोकॉल: सक्रिय। अभी मंडी में लाइन लगाने की आवश्यकता नहीं है; 10:45 AM पर सीधे अनलोडिंग के लिए पहुंचें।",
+    "intent": "mandi_token",
+    "language": "hindi"
+  },
+  {
+    "timestamp": "2026-09-25T11:36:15.665257",
+    "user": "What is my current token status?",
+    "assistant": "🌾 Digital Token Status: M-142 (🟢 ON TRACK)\n• Farmer: Ramesh Singh\n• Mandi Centre: Centre #14 — Hapur Central Mandi\n• Crop: Wheat (Kalyan Sona / FAQ Grade) — 25.0 Quintals (2,500 kg)\n• Slot Time: 10:00 AM – 11:30 AM\n• Queue Position: 8 farmers ahead (Currently Serving: Token M-134)\n• Estimated Wait: 45 minutes\n• Recommended Arrival: 10:45 AM (Gate Entry #2)\n• Govt MSP Rate: ₹2,275.00/Qtl (Estimated Gross: ₹56,875.00)\n• Zero-Waiting Protocol: Active (Arrive directly at 10:45 AM for unloading to avoid queuing).",
+    "intent": "farmer_token",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T11:36:16.986519",
+    "user": "Which procurement centre has less waiting?",
+    "assistant": "📍 Mandi Queue & Wait Time Analysis:\n• Shortest Queue: Centre #03 — Karnal Agri Terminal currently has the shortest queue (estimated wait time: 5–10 minutes).\n• Centre #08 — Meerut Grain Mandi is also operating smoothly (~10–15 minutes wait).\n• Centre #14 — Hapur Central Mandi currently has 8 farmers in line (~40–45 minutes wait).\n\n💡 Recommendation: To avoid waiting in line, book an arrival slot at Centre #03 — Karnal Agri Terminal.",
+    "intent": "shortest_queue",
+    "language": "english"
+  },
+  {
+    "timestamp": "2026-09-25T11:36:19.192424",
+    "user": "Can I get an alert when my turn is near?",
+    "assistant": "I am MandiSetu AI, your dedicated farming and mandi assistant. I can help with token status, payments, mandi queues, crop advisory, and current market prices. Please let me know how I can assist with your agricultural needs!",
+    "intent": "out_of_scope",
     "language": "english"
   }
 ]

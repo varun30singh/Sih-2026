@@ -31,7 +31,7 @@ export const ChatHeader: React.FC = () => {
         </div>
         <div>
           <div className="flex items-center gap-1.5 leading-tight">
-            <h3 className="font-bold text-sm tracking-wide text-white">ProcureAI</h3>
+            <h3 className="font-bold text-sm tracking-wide text-white">Krish AI</h3>
             <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded-full bg-white/20 text-emerald-100">
               SIH26032
             </span>
@@ -44,7 +44,7 @@ export const ChatHeader: React.FC = () => {
             />
             <span>{isOnline ? 'Online' : 'Offline'}</span>
             <span className="text-emerald-200/60">•</span>
-            <span className="text-emerald-100 text-[10px]">MandiSetu Assistant</span>
+            <span className="text-emerald-100 text-[10px]">Krish AI</span>
           </div>
         </div>
       </div>
