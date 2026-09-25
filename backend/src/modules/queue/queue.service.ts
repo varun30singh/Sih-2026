@@ -43,22 +43,123 @@ export class QueueService {
     return queueItem;
   }
 
-  findAll() {
-    return this.prisma.queue.findMany({
+  async findAll(filter?: { farmerId?: number; bookingId?: number; centreId?: number }) {
+    if (filter?.farmerId !== undefined && isNaN(filter.farmerId)) {
+      return [];
+    }
+    if (filter?.bookingId !== undefined && isNaN(filter.bookingId)) {
+      return [];
+    }
+    if (filter?.centreId !== undefined && isNaN(filter.centreId)) {
+      return [];
+    }
+
+    const where: any = {};
+
+    if (filter?.farmerId !== undefined) {
+      where.bookings = {
+        OR: [
+          { farmer_id: filter.farmerId },
+          { farmers: { user_id: filter.farmerId } },
+        ],
+      };
+    }
+
+    if (filter?.bookingId !== undefined) {
+      where.booking_id = filter.bookingId;
+    }
+
+    if (filter?.centreId !== undefined) {
+      where.centre_id = filter.centreId;
+    }
+
+    const items = await this.prisma.queue.findMany({
+      where: Object.keys(where).length > 0 ? where : undefined,
+      include: {
+        bookings: {
+          include: {
+            farmers: true,
+            crops: true,
+          },
+        },
+        procurement_centres: true,
+      },
       orderBy: { id: 'desc' },
     });
+
+    return items.map((item) => this.formatQueueEntry(item));
   }
 
   async findOne(id: number) {
     const queueItem = await this.prisma.queue.findUnique({
       where: { id },
+      include: {
+        bookings: {
+          include: {
+            farmers: true,
+            crops: true,
+          },
+        },
+        procurement_centres: true,
+      },
     });
 
     if (!queueItem) {
       throw new NotFoundException('Queue entry not found');
     }
 
-    return queueItem;
+    return this.formatQueueEntry(queueItem);
+  }
+
+  private formatQueueEntry(item: any) {
+    const booking = item.bookings;
+    const farmer = booking?.farmers;
+    const crop = booking?.crops;
+    const centre = item.procurement_centres;
+
+    return {
+      id: item.id,
+      booking_id: item.booking_id,
+      centre_id: item.centre_id,
+      status: item.status,
+      entered_at: item.entered_at,
+      called_at: item.called_at,
+
+      // Joined details
+      token_number: booking?.token_number ?? null,
+      farmer_id: booking?.farmer_id ?? null,
+      farmer_name: farmer?.name ?? null,
+      farmer_phone: farmer?.phone ?? null,
+      farmer_village: farmer?.village ?? null,
+      crop_id: booking?.crop_id ?? null,
+      crop_name: crop?.name ?? null,
+      commodity: crop?.name ?? null,
+      quantity: booking?.quantity_estimate ? Number(booking.quantity_estimate) : null,
+      quantity_estimate: booking?.quantity_estimate ? Number(booking.quantity_estimate) : null,
+      centre_name: centre?.name ?? null,
+
+      // Preserving full nested objects
+      booking: booking
+        ? {
+            id: booking.id,
+            slot_id: booking.slot_id,
+            crop_id: booking.crop_id,
+            token_number: booking.token_number,
+            quantity_estimate: booking.quantity_estimate ? Number(booking.quantity_estimate) : null,
+            status: booking.status,
+            booked_by: booking.booked_by,
+            farmer_name: farmer?.name ?? null,
+            crop_name: crop?.name ?? null,
+          }
+        : null,
+      procurement_centre: centre
+        ? {
+            id: centre.id,
+            name: centre.name,
+            location: centre.location,
+          }
+        : null,
+    };
   }
 
   async update(id: number, updateQueueDto: UpdateQueueDto) {

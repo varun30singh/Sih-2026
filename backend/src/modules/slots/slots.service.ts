@@ -43,8 +43,12 @@ export class SlotsService {
     return slot;
   }
 
-  async findAll() {
+  async findAll(centreId?: number) {
+    if (centreId !== undefined && isNaN(centreId)) {
+      return [];
+    }
     return this.prisma.slots.findMany({
+      where: centreId !== undefined ? { centre_id: centreId } : undefined,
       orderBy: { id: 'desc' },
     });
   }

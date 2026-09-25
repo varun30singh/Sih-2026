@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
@@ -28,8 +29,16 @@ export class QueueController {
   }
 
   @Get()
-  findAll() {
-    return this.queueService.findAll();
+  findAll(
+    @Query('farmer_id') farmerId?: string,
+    @Query('booking_id') bookingId?: string,
+    @Query('centre_id') centreId?: string,
+  ) {
+    return this.queueService.findAll({
+      farmerId: farmerId !== undefined ? parseInt(farmerId, 10) : undefined,
+      bookingId: bookingId !== undefined ? parseInt(bookingId, 10) : undefined,
+      centreId: centreId !== undefined ? parseInt(centreId, 10) : undefined,
+    });
   }
 
   @Get(':id')

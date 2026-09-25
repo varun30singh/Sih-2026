@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
@@ -28,8 +29,9 @@ export class SlotsController {
   }
 
   @Get()
-  findAll() {
-    return this.slotsService.findAll();
+  findAll(@Query('centre_id') centreId?: string) {
+    const parsedCentreId = centreId !== undefined ? parseInt(centreId, 10) : undefined;
+    return this.slotsService.findAll(parsedCentreId);
   }
 
   @Get(':id')
