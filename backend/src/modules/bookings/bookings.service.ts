@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -22,6 +23,14 @@ export class BookingsService {
 
     const bookings = await this.prisma.bookings.findMany({
       where: { farmer_id: parsedFarmerId },
+      include: {
+        slots: {
+          include: {
+            procurement_centres: true,
+          },
+        },
+        crops: true,
+      },
       orderBy: { id: 'desc' },
     });
 
@@ -293,6 +302,69 @@ export class BookingsService {
       result,
       'Slot booked successfully',
     );
+  }
+
+  async cancel(bookingId: number, userId: number) {
+    if (!Number.isInteger(bookingId) || bookingId <= 0) {
+      throw new BadRequestException(
+        'Invalid bookingId: must be a positive integer',
+      );
+    }
+
+    const result = await this.prisma.$transaction(async (tx) => {
+      const booking = await tx.bookings.findUnique({
+        where: { id: bookingId },
+        include: {
+          farmers: true,
+          slots: true,
+        },
+      });
+
+      if (!booking) {
+        throw new NotFoundException(`Booking with id ${bookingId} not found`);
+      }
+
+      if (booking.farmers?.user_id !== userId) {
+        throw new ForbiddenException(
+          'You are not authorized to cancel this booking.',
+        );
+      }
+
+      if (booking.status === $Enums.booking_status.cancelled) {
+        throw new BadRequestException(
+          'This booking has already been cancelled.',
+        );
+      }
+
+      const updatedBooking = await tx.bookings.update({
+        where: { id: bookingId },
+        data: {
+          status: $Enums.booking_status.cancelled,
+        },
+      });
+
+      await tx.queue.updateMany({
+        where: { booking_id: bookingId },
+        data: {
+          status: $Enums.queue_status.done,
+        },
+      });
+
+      if (booking.slots && booking.slots.booked_count > 0) {
+        await tx.slots.update({
+          where: { id: booking.slot_id },
+          data: {
+            booked_count: {
+              decrement: 1,
+            },
+          },
+        });
+      }
+
+      return updatedBooking;
+    });
+
+    return createSuccessResponse(result, 'Booking cancelled successfully');
   }
 
   private generateToken(): string {
