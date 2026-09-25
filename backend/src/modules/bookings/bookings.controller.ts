@@ -23,7 +23,7 @@ export class BookingsController {
     @Body() createBookingDto: CreateBookingDto,
     @Req() request: { user: { userId: number } },
   ) {
-    return this.bookingsService.create(createBookingDto);
+    return this.bookingsService.create(createBookingDto, request.user?.userId);
   }
 
   @UseGuards(JwtAuthGuard)

@@ -52,12 +52,14 @@ export async function createUserWithProfile(
         },
       });
 
+      let profileData: Record<string, any> = {};
+
       switch (input.role) {
         case user_role.farmer:
           if (!input.name) {
             throw new BadRequestException('name is required for farmer registration');
           }
-          await tx.farmers.create({
+          const farmer = await tx.farmers.create({
             data: {
               user_id: user.id,
               name: input.name,
@@ -66,26 +68,46 @@ export async function createUserWithProfile(
               phone: input.phone,
             },
           });
+          profileData = {
+            farmer_id: farmer.id,
+            farmer: {
+              id: farmer.id,
+              name: farmer.name,
+              village: farmer.village,
+              phone: farmer.phone,
+            },
+          };
           break;
         case user_role.retail_user:
-          await tx.retail_users.create({ data: { user_id: user.id } });
+          const retailUser = await tx.retail_users.create({ data: { user_id: user.id } });
+          profileData = { retail_user_id: retailUser.id };
           break;
         case user_role.stockist:
-          await tx.stockists.create({
+          const stockist = await tx.stockists.create({
             data: {
               user_id: user.id,
               business_name: input.business_name,
             },
           });
+          profileData = {
+            stockist_id: stockist.id,
+            stockist: {
+              id: stockist.id,
+              business_name: stockist.business_name,
+            },
+          };
           break;
         case user_role.broker:
-          await tx.brokers.create({ data: { user_id: user.id } });
+          const broker = await tx.brokers.create({ data: { user_id: user.id } });
+          profileData = { broker_id: broker.id };
           break;
         case user_role.buyer:
-          await tx.buyers.create({ data: { user_id: user.id } });
+          const buyer = await tx.buyers.create({ data: { user_id: user.id } });
+          profileData = { buyer_id: buyer.id };
           break;
         case user_role.operator:
-          await tx.operators.create({ data: { user_id: user.id } });
+          const operator = await tx.operators.create({ data: { user_id: user.id } });
+          profileData = { operator_id: operator.id };
           break;
         case user_role.admin:
           break;
@@ -93,7 +115,10 @@ export async function createUserWithProfile(
           throw new BadRequestException('This role cannot be registered');
       }
 
-      return user;
+      return {
+        ...user,
+        ...profileData,
+      };
     });
   } catch (error) {
     if (

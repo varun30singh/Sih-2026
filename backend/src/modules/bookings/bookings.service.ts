@@ -37,12 +37,21 @@ export class BookingsService {
     return createSuccessResponse(bookings);
   }
 
-  async create(body: any) {
+  async create(body: any, userId?: number) {
     if (!body || typeof body !== 'object') {
       throw new BadRequestException('Request body is required');
     }
 
-    const farmerIdRaw = body.farmer_id ?? body.farmerId;
+    let farmerIdRaw = body.farmer_id ?? body.farmerId;
+    if ((farmerIdRaw === undefined || farmerIdRaw === null || farmerIdRaw === '') && userId) {
+      const farmer = await this.prisma.farmers.findFirst({
+        where: { user_id: userId },
+      });
+      if (farmer) {
+        farmerIdRaw = farmer.id;
+      }
+    }
+
     const slotIdRaw = body.slot_id ?? body.slotId;
     const cropIdRaw = body.crop_id ?? body.cropId;
     const quantityEstimateRaw =
