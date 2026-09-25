@@ -13,6 +13,7 @@
     "dev:chatbot": "./start.sh",
     "build:frontend": "npm --prefix frontend run build",
     "build:backend": "npm --prefix backend run build",
+    "build:render": "cd backend && npx prisma generate && npm run build",
     "build": "npm --prefix frontend run build && npm --prefix backend run build",
     "type-check": "npm --prefix frontend run type-check && npm --prefix backend run type-check",
     "lint": "npm --prefix frontend run lint",

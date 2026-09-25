@@ -1,4 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { Roles } from '../../common/guards/roles.decorator';
+import { RolesGuard } from '../../common/guards/roles.guard';
 import { BrokersService } from './brokers.service';
 import { CreateBrokerDto } from './dto/create-broker.dto';
 import { UpdateBrokerDto } from './dto/update-broker.dto';
@@ -17,16 +20,21 @@ export class BrokersController {
     return this.brokersService.findById(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   createBroker(@Body() body: CreateBrokerDto) {
     return this.brokersService.create(body);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('operator', 'admin')
   @Patch(':id')
   updateBroker(@Param('id') id: string, @Body() body: UpdateBrokerDto) {
     return this.brokersService.update(id, body);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('operator', 'admin')
   @Delete(':id')
   deleteBroker(@Param('id') id: string) {
     return this.brokersService.remove(id);
